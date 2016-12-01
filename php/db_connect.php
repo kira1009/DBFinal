@@ -8,9 +8,15 @@
 
 require 'config.inc';
 
-//connect to database
-$connection = new mysqli($dbhost, $userName, $passwd, $schema, $port);
-if ($connection->connect_errno) {
-    echo "Failed to connect to MySQL: (" . $connection->connect_errno . ") " . $connection->connect_error;
+    /**
+     * connect to database
+     * @return mysqli|null
+     */
+    function connectDb() {
+        $connection = new mysqli($dbhost, $userName, $passwd, $schema, $port);
+        if ($connection->connect_errno) {
+            echo "Failed to connect to MySQL: (" . $connection->connect_errno . ") " . $connection->connect_error;
+            return null;
+        }
+        return $connection;
 }
-echo $connection->host_info . "\n";
