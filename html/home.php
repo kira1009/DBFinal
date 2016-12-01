@@ -7,7 +7,14 @@
 </head>
 <body>
     <div class="body">
-        <form
+<!--        <div class="header">-->
+<!--            <img class="headerPic" alt="headerPic" src="img/header.jpg"/>-->
+<!--        </div>-->
+        <ul id="menu" class="menu">
+            <li><a href="index.php">CookZilla</a></li>
+            <li><input id="recipe" placeholder="Find a recipe"></li>
+            <li><a href="index.php">CookZilla</a></li>
+        </ul>
         <div class="footer">
             <div>Copyright &copy; CookZilla TM. All Right Reserved.</div>
             <div>ADDRESS: 5 MetroTech, Brooklyn, 11201</div>
