@@ -19,4 +19,4 @@ require 'config.inc';
             return null;
         }
         return $connection;
-}
+    }
