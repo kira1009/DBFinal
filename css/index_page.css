@@ -1,0 +1,183 @@
+body{
+    width:100%;
+    position:relative;
+    margin:auto;
+    background-image: url("../img/background.jpg");
+    -moz-background-size:contain;
+    -webkit-background-size:contain;
+    -o-background-size:contain;
+    background-size: 100%;
+}
+
+.search{
+    width: 300px;
+    background-color:#ffffff;
+    height: 30px;
+    font-size: 20px;
+
+}
+.header{
+    color:#000000;
+    text-align:center;
+    font-weight:bold;
+    padding-top:0px;
+}
+
+.welcome{
+    width: 960px;
+    background-color: transparent;
+    font-size: medium;
+    font-family:"Times New Roman";
+    margin: auto;
+    margin-top: 55px;
+    margin-bottom: 200px;
+    font-family: Georgia;
+    overflow: auto;
+}
+.welcome h1{
+    font-size: 30px;
+    color: green;
+}
+
+.welcome p{
+    font-size: 20px;
+    color: forestgreen;
+}
+
+.welcome h2{
+    font-size: 25px;
+    font-weight:bolder;
+    margin-top: 40px;
+}
+
+.welcome h3{
+    font-size: 25px;
+    font-weight:bold;
+}
+
+.footer{
+    width:100%;
+    text-align:center;
+    font-size:16px;
+    border-top: solid gray 1px;
+    padding-top: 10px;
+    margin-bottom: 0px;
+    padding-bottom: 20px;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    font-family:"Courier New";
+    font-style: oblique;
+}
+.headerPic{
+    font-size:30px;
+    font-weight:bold;
+    text-align:center;
+    width: 100%;
+    height: 150px;
+    padding-bottom:20px;
+    margin-left: 0px;
+
+}
+
+.option{
+    display:inline;
+    padding-right: 30px;
+    float:right;
+    width: 180px;
+    height: 104px;
+}
+
+.username{
+    line-height: 30px;
+    font-size: 20px;
+    cursor:pointer;
+}
+#logout{
+    line-height: 30px;
+    font-size: 20px;
+    cursor:pointer;
+}
+.option input{
+    height:25px;
+    width:150px;
+    margin-top:10px;
+}
+.option img{
+    position: absolute;
+    left:895px;
+    margin:15px 20px 0 0;
+}
+
+/******** Navigation ********/
+.left{
+    width:220px;
+    min-height: 900px;
+    float:left;
+    background-color: #fbecfb;
+}
+.right{
+    width:740px;
+    min-height: 900px;
+    float:right;
+    background-color: #fdf6fd;
+}
+.navHead {
+    height: 40px;
+    width: 740px;
+    font-family: sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 10px 0 0 0;
+    color: #000;
+    background-color: #FFF;
+    border-bottom: #ccc 1px solid;
+    text-align: center;
+}
+
+/******** Menu ********/
+.menu {
+    width:100%;
+    padding: 9px 0 10px;
+    margin:0;
+    position: relative;
+    background-color: yellowgreen;
+    font-family: 'Economica', Curlz MT;
+    z-index: 99;
+    text-align: center;
+    position: relative;
+}
+.menu ul {
+    position: absolute;
+    display: none;
+}
+.menu li {
+    display: inline-block;
+    float: none;
+    font-size: 30px;
+    line-height: 15px;
+    position:relative;
+    cursor: pointer;
+}
+.menu li a {
+    text-align: center;
+    display: inline-block;
+    padding: 10px 24px 11px;
+    position: relative;
+    color: #fff;
+    text-decoration:none;
+}
+
+
+.menu li:hover {
+    background-color:#eecaf0;
+    display: inline-block;
+    float: none;
+    font-size: 30px;
+    line-height: 15px;
+    position:relative;
+}
+.category img{
+    cursor: pointer;
+}
