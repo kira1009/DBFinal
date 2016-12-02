@@ -8,6 +8,7 @@
 
     /**
      * check whether the input is illegal to avoid sql injection or sql attack
+     * and check the XXS attack for the input
      * @param $input
      * @param $maxLength
      * @param $connection
@@ -17,6 +18,7 @@
         if(isset($input)) {
             $result = substr($input, 0, $maxLength);
             $result = mysqli_real_escape_string($connection, $result);
+            $result = htmlspecialchars($result);
             return ($result);
         }
         return null;
