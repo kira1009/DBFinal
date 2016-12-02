@@ -1,11 +1,11 @@
 <?php
 session_start();
-$_POST['origin'] = '1'; //0-login; 1-register.
+$_POST['origin'] = '0'; //0-login; 1-register.
 ?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Register</title>
+    <title>Login</title>
     <link rel="stylesheet" href="../css/common.css" type="text/css"/>
     <link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css"/>
 </head>
@@ -19,21 +19,15 @@ $_POST['origin'] = '1'; //0-login; 1-register.
     </ul>
 
     <form id="register" class="register" method="post" action="home.php">
-        <h3 class="formTitle">Sign Up</h3>
+        <h3 class="formTitle">Sign In</h3>
         <hr>
         <div class="form-group">
             <input autofocus="autofocus" id="username" maxlength="32" minlength="1" name="username" placeholder="Username" type="text" required class="formInput">
         </div>
         <div class="form-group">
-            <input autofocus="autofocus" id="realname" maxlength="255" minlength="1" name="realname" placeholder="Real name" type="text" required class="formInput">
-        </div>
-        <div class="form-group">
             <input id="password" name="password" placeholder="Password" type="password" required class="formInput">
         </div>
-        <div class="form-group">
-            <textarea id="profile" name="profile" placeholder="Enter your self description here" class="formInput formText"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Sign up for CookZilla</button>
+        <button type="submit" class="btn btn-primary">Login</button>
     </form>
 
 
