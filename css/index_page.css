@@ -163,12 +163,22 @@ body{
 .menu li a {
     text-align: center;
     display: inline-block;
-    padding: 10px 24px 11px;
+    padding: 9px 10px 9px;
     position: relative;
     color: #fff;
     text-decoration:none;
 }
 
+.gap{
+    width: 1000px;
+}
+
+.button{
+    font-size: 25px;
+    border-radius: 4px;
+    border:1px solid;
+    margin-right:3px;
+}
 
 .menu li:hover {
     background-color:#eecaf0;
