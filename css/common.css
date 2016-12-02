@@ -16,11 +16,43 @@ body{
     font-size: 20px;
 
 }
-.header {
+.header{
     color:#000000;
     text-align:center;
     font-weight:bold;
     padding-top:0px;
+}
+
+.welcome{
+    width: 960px;
+    background-color: transparent;
+    font-size: medium;
+    font-family:"Times New Roman";
+    margin: auto;
+    margin-top: 55px;
+    margin-bottom: 200px;
+    font-family: Georgia;
+    overflow: auto;
+}
+.welcome h1{
+    font-size: 30px;
+    color: green;
+}
+
+.welcome p{
+    font-size: 20px;
+    color: forestgreen;
+}
+
+.welcome h2{
+    font-size: 25px;
+    font-weight:bolder;
+    margin-top: 40px;
+}
+
+.welcome h3{
+    font-size: 25px;
+    font-weight:bold;
 }
 
 .footer{
@@ -31,7 +63,7 @@ body{
     padding-top: 10px;
     margin-bottom: 0px;
     padding-bottom: 20px;
-    color: black;
+    color: white;
     font-size: 20px;
     font-weight: bold;
     font-family:"Courier New";
@@ -107,7 +139,7 @@ body{
 /******** Menu ********/
 .menu {
     width:100%;
-    padding: 20px 0 21px;
+    padding: 9px 0 10px;
     margin:0;
     position: relative;
     background-color: yellowgreen;
@@ -136,6 +168,8 @@ body{
     color: #fff;
     text-decoration:none;
 }
+
+
 .menu li:hover {
     background-color:#eecaf0;
     display: inline-block;
