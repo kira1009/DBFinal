@@ -2,13 +2,68 @@ body{
     width:100%;
     position:relative;
     margin:auto;
+    font-family: "Helvetica Neue";
+}
+
+.register{
+    max-width: 400px;
+    padding:19px 29px 29px;
+    margin: 50px auto 150px;
+    background-color: white;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+
+.formTitle{
+    font-size: 24px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+
+}
+
+.formInput{
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+.formText{
+    height: 100px;
+}
+
+.footer{
+    width:80%;
+    text-align:center;
+    font-size:16px;
+    border-top: solid #eeeeee 1px;
+    padding-top: 10px;
+    margin:auto;
+    padding-bottom: 20px;
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+    font-family:"Courier New";
+    font-style: oblique;
 }
 
 /******** Menu ********/
 .menu {
     width:100%;
     padding: 9px 0 10px;
-    margin:0;
+    margin:auto;
+    margin-bottom: 30px;
     position: relative;
     background-color: yellowgreen;
     font-family: 'Economica', Curlz MT;
@@ -31,12 +86,22 @@ body{
 .menu li a {
     text-align: center;
     display: inline-block;
-    padding: 10px 24px 11px;
+    padding: 9px 10px 9px;
     position: relative;
     color: #fff;
     text-decoration:none;
 }
 
+.gap{
+    width: 1000px;
+}
+
+.button{
+    font-size: 25px;
+    border-radius: 4px;
+    border:1px solid;
+    margin-right:3px;
+}
 
 .menu li:hover {
     background-color:#eecaf0;
