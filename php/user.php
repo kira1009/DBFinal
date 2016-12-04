@@ -15,14 +15,16 @@ $connection = connectDb();
 if (mysqli_connect_errno()) {
     echo "Failed to connect to MySQL: (" . mysqli_connect_errno() . ") " . mysqli_connect_error();
     $connection = null;
-}
-
-// 1-register, 0-login
-if($_POST['origin'] == '1') {
-    $response = register_user($connection);
-}else {
-    //user login
-    $response = user_login($connection);
+    $response[0] = false;
+    $response[1] = 'Database connection error';
+} else {
+    // 1-register, 0-login
+    if($_POST['origin'] == '1') {
+        $response = register_user($connection);
+    }else {
+        //user login
+        $response = user_login($connection);
+    }
 }
 
 //process return
@@ -33,12 +35,9 @@ if($response[0] == true) {
     echo "<script>window.history.go(-1)</script>";
 }
 
+$connection->close();
+
 function register_user($connection) {
-    if($connection == null) {
-        $response[0] = false;
-        $response[1] = 'Database connection error';
-        return;
-    }
 
     //check whether the input is valid
     $username = cleanInput($_POST['username'], 32, $connection);
@@ -110,6 +109,54 @@ function register_user($connection) {
     return $response;
 }
 
+function user_login($connection) {
+    //check whether the input is valid
+    $username = cleanInput($_POST['username'], 32, $connection);
+    $password = cleanInput($_POST['password'], 255, $connection);
+
+    if($username == null || $password == null) {
+        $response[0] = false;
+        $response[1] = 'Illegal input, go back to login page';
+        return $response;
+    }
+
+    //check username duplication
+    if (!($stmt0 = $connection->prepare("SELECT password FROM User WHERE uname=?"))) {
+        $response[0] = false;
+        $response[1] = 'DB statement prepare error';
+        $stmt0->close();
+        return $response;
+    }
+
+    if(!$stmt0->bind_param('s', $username)) {
+        $response[0] = false;
+        $response[1] = 'DB parameter bind error';
+        $stmt0->close();
+        return $response;
+    }
+
+    if(!$stmt0->execute()) {
+        $response[0] = false;
+        $response[1] = 'DB statement execute error';
+        $stmt0->close();
+        return $response;
+    }
+
+    $res = $stmt0->get_result();
+    $row = $res->fetch_array(MYSQLI_NUM);
+
+    $inputPassword = md5($password);
+    if($inputPassword != $row[0]) {
+        $response[0] = false;
+        $response[1] = 'Wrong password, please enter the correct one';
+        $stmt0->close();
+        return $response;
+    }
+    $stmt0->close();
+    $response[0] = true;
+    $response[1] = 'Successfully login';
+    return $response;
+}
 ?>
 </body>
 </html>

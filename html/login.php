@@ -18,7 +18,7 @@ $_POST['origin'] = '0'; //0-login; 1-register.
         <li><a href="register.php" class="button">Sign Up</a></li>
     </ul>
 
-    <form id="register" class="register" method="post" action="home.php">
+    <form id="login" class="register" method="post" style="margin-bottom: 300px" action="../php/user.php">
         <h3 class="formTitle">Sign In</h3>
         <hr>
         <div class="form-group">
@@ -30,7 +30,6 @@ $_POST['origin'] = '0'; //0-login; 1-register.
         </div>
         <button type="submit" class="btn btn-primary">Login</button>
     </form>
-
 
     <div class="footer">
         <div>Copyright &copy; CookZilla TM. All Right Reserved.</div>
