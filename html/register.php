@@ -1,6 +1,5 @@
 <?php
 session_start();
-$_POST['origin'] = '1'; //0-login; 1-register.
 ?>
 <html lang="en">
 <head>
@@ -18,11 +17,12 @@ $_POST['origin'] = '1'; //0-login; 1-register.
         <li><a href="register.php" class="button">Sign Up</a></li>
     </ul>
 
-    <form id="register" class="register" method="post" action="home.php">
+    <form id="register" class="register" method="post" action="../php/user.php">
         <h3 class="formTitle">Sign Up</h3>
         <hr>
         <div class="form-group">
             <input autofocus="autofocus" id="username" maxlength="32" minlength="1" name="username" placeholder="Username" type="text" required class="formInput">
+            <input type="hidden" id="origin" name="origin" value="1">
         </div>
         <div class="form-group">
             <input autofocus="autofocus" id="realname" maxlength="255" minlength="1" name="realname" placeholder="Real name" type="text" required class="formInput">
@@ -31,11 +31,10 @@ $_POST['origin'] = '1'; //0-login; 1-register.
             <input id="password" name="password" placeholder="Password" type="password" required class="formInput">
         </div>
         <div class="form-group">
-            <textarea id="profile" name="profile" placeholder="Enter your self description here" class="formInput formText"></textarea>
+            <textarea id="profile" name="profile" placeholder="Enter your self description here" class="formInput formText" maxlength="255"></textarea>
         </div>
         <button type="submit" class="btn btn-primary">Sign up for CookZilla</button>
     </form>
-
 
     <div class="footer">
         <div>Copyright &copy; CookZilla TM. All Right Reserved.</div>

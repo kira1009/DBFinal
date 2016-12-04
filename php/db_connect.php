@@ -6,16 +6,19 @@
  * Time: 12:13 AM
  */
 
-require 'config.inc';
 
     /**
      * connect to database
      * @return mysqli|null
      */
     function connectDb() {
-        $connection = new mysqli($dbhost, $userName, $passwd, $schema, $port);
-        if ($connection->connect_errno) {
-            echo "Failed to connect to MySQL: (" . $connection->connect_errno . ") " . $connection->connect_error;
+        $dbhost = "52.36.21.186";
+        $userName = "cookzillaadmin";
+        $passwd = "Cook4zilla";
+        $schema = "CookZilla";
+        $connection = new mysqli($dbhost, $userName, $passwd, $schema);
+        if (mysqli_connect_errno()) {
+            echo "Failed to connect to MySQL: (" . mysqli_connect_errno() . ") " . mysqli_connect_error();
             return null;
         }
         return $connection;

@@ -23,6 +23,7 @@ $_POST['origin'] = '0'; //0-login; 1-register.
         <hr>
         <div class="form-group">
             <input autofocus="autofocus" id="username" maxlength="32" minlength="1" name="username" placeholder="Username" type="text" required class="formInput">
+            <input type="hidden" id="origin" name="origin" value="0">
         </div>
         <div class="form-group">
             <input id="password" name="password" placeholder="Password" type="password" required class="formInput">
