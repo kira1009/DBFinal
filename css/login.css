@@ -1,0 +1,12 @@
+/* 
+    Created on : Dec 5, 2016, 2:30:32 AM
+    Author     : babylu
+*/
+.register{
+    max-width: 400px;
+    padding:19px 29px 29px;
+    margin: 50px auto 150px;
+    background-color: white;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
