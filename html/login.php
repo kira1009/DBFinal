@@ -7,15 +7,15 @@ session_start();
     <title>Login</title>
     <link rel="stylesheet" href="../css/common.css" type="text/css"/>
     <link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css"/>
+    <link rel="stylesheet" href="../css/login.css" type="text/css"/>
 </head>
 <body>
 <div class="body">
-    <ul id="menu" class="menu">
-        <li><a href="../index.html">CookZilla</a></li>
-        <li class="gap">&nbsp;</li>
-        <li><a href="login.php" class="button">Sign In</a></li>
-        <li><a href="register.php" class="button">Sign Up</a></li>
-    </ul>
+    <div class="header">
+        <div id="goHome">CookZilla</div>
+        <div class="signButton" style="margin-right: 100px;"><a href="html/register.php">Sign Up</a></div>
+        <div class="signButton"><a href="html/login.php">Sign In</a></div>
+    </div>
 
     <form id="login" class="register" method="post" style="margin-bottom: 300px" action="../php/user.php">
         <h3 class="formTitle">Sign In</h3>
