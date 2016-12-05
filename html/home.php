@@ -9,6 +9,14 @@ session_start();
     <link rel="stylesheet" href="../css/common.css" type="text/css"/>
     <link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css"/>
     <link rel="stylesheet" href="../css/home.css" type="text/css"/>
+    <script src="../js/jquery-3.1.1.min.js"/>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#tag").click(function(){
+                $("#tags").css("visibility","visible");
+            });
+        });
+    </script>
 </head>
 <body>
 <div class="body">
@@ -21,26 +29,35 @@ session_start();
         <div id="goHome">
             <a href="home.php" style="text-decoration: none;">CookZilla</a>
         </div>
+        <form id="search" method="post" action="../php/search.php" enctype="multipart/form-data">
         <div class="search">
-            <form id="search" method="post" action="" enctype="multipart/form-data">
-                <div><input id="searchText" name="search" type="text" placeholder="Find a recipe"></div>
-                <div id="tag">Tag<span class="caret"></span></div>
+                <div><input id="searchText" name="search" type="text" placeholder="Find a recipe" style="color: grey;"></div>
+                <div id="tag" style="cursor:pointer;">Tag<span class="caret"></span></div>
                 <div style="margin-top: 3px;"><button class="btn btn-default">Search</button></div>
-            </form>
         </div>
         <div id="username"><?php echo $_SESSION['username'];?></div>
-    </div>
-    
-    <div id="tagContent" class="hidden">
+        <div id="tags" class="tags">
+            <?php
+            require '../php/db_query.php';
+            $count = 1;
+            foreach (getTags() as $element) {
+                echo "<div id='tagOption".$count."' style='width: 30%'><input type='checkbox' name=selectedTag[] value=".$element['tname']." style='width: 20px'/><label>".$element['tname']."</label></div>";
+                $count = $count + 1;
+            }
+            ?>
+            <button class="btn btn-default" style="float: right">Cancel</button>
+            <button class="btn btn-primary" style="float: right">OK</button>
+        </div>
 
+        </form>
     </div>
-    
+    </div>
 
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-sm-9">
                 <div class="jumbotron">
-                    Welcome to our website <?php echo $_SESSION['username']?>
+                    <h3>Welcome to our website <?php echo $_SESSION['username']?>!</h3>
                     <br>
                     <a href="createrecipe.php" class="btn btn-primary">Create your recipe</a>
                 </div>

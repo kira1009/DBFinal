@@ -27,12 +27,16 @@
     color: white;
 }
 
-.tagSelect{
-    width: 80px;
-}
 #username{
     float:right;
     margin-right: 100px;
     font-size: 20px;
     margin-top: 10px;
+}
+
+.tags{
+    visibility: hidden;
+    color: black;
+    background-color: yellowgreen;
+    margin: auto
 }

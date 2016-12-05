@@ -7,7 +7,6 @@
  */
 require 'db_connect.php';
 require 'common_util.php';
-var_dump(getUserRecipe("kira1009"));
 /**
  * get all the tags from database
  */
@@ -27,7 +26,7 @@ function getTags() {
  */
 function getUserRecipe($username) {
     $conn = connectDb();
-    $username = cleanInput($username);
+    $username = cleanInput($username, 32, $conn);
     $sql = "SELECT rid, rtitle, rimage FROM Recipe WHERE uname=? ORDER BY TIMESTAMP";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('s', $username);
@@ -43,10 +42,10 @@ function getUserRecipe($username) {
  * @param $username
  * @return mixed
  */
-function getUserRecipe($username) {
+function getUserViewedRecipe($username) {
     $conn = connectDb();
     $username = cleanInput($username);
-    $sql = "SELECT rid, rtitle, rimage FROM Recipe WHERE uname=? ORDER BY TIMESTAMP";
+    $sql = "SELECT rid, rtitle, rimage FROM Recipe r, Log l WHERE l.uname=? AND l.type=0 AND l.content=r.rid AND l.uname != r.uname ORDER BY l.timestamp";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('s', $username);
     $stmt->execute();
@@ -54,4 +53,8 @@ function getUserRecipe($username) {
     $result = $res->fetch_all(MYSQLI_ASSOC);
     $conn->close();
     return $result;
+}
+
+function getUserGroup($username) {
+
 }
