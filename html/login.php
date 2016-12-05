@@ -10,6 +10,7 @@ session_start();
     <link rel="stylesheet" href="../css/login_register.css" type="text/css"/>
 </head>
 <body>
+<div class="body">
     <div class="header">
         <div id="goHome">
             <a href="../index.html" style="text-decoration : none;">CookZilla</a>
@@ -21,7 +22,7 @@ session_start();
             <a href="./login.php" style="text-decoration : none;"z>Sign In</a>
         </div>
     </div>
-    <div class="body">
+    <div class="main">
         <form id="login" class="login" method="post" style="margin-bottom: 300px" action="../php/user.php">
             <h3 class="formTitle">Sign In</h3>
             <hr>
@@ -40,5 +41,6 @@ session_start();
         <div>ADDRESS: 5 MetroTech, Brooklyn, 11201</div>
         <div>EMAIL: CookZilla@gmail.com</div>
     </div>
+</div>
 </body>
 </html>

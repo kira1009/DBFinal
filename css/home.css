@@ -1,0 +1,38 @@
+/* 
+    Created on : Dec 5, 2016, 3:33:42 AM
+    Author     : babylu
+*/
+.header div{
+    display: inline-block;
+    margin-top:5px;
+    float:left;
+}
+
+.search{
+    margin-left: 200px;
+    width: 600px;
+}
+
+.search input{
+    width: 450px;
+    height:30px;
+    font-size: 25px;
+}
+
+#tag{
+    width: 70px;
+    height: 30px;
+    font-size: 20px;
+    margin-left: 5px;
+    color: white;
+}
+
+.tagSelect{
+    width: 80px;
+}
+#username{
+    float:right;
+    margin-right: 100px;
+    font-size: 20px;
+    margin-top: 10px;
+}

@@ -8,6 +8,7 @@ session_start();
     <title>CookZilla</title>
     <link rel="stylesheet" href="../css/common.css" type="text/css"/>
     <link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css"/>
+    <link rel="stylesheet" href="../css/home.css" type="text/css"/>
 </head>
 <body>
 <div class="body">
@@ -16,26 +17,24 @@ session_start();
             echo "<script>window.location.href = './login.php';</script>";
         }
     ?>
+    <div class="header">
+        <div id="goHome">
+            <a href="home.php" style="text-decoration: none;">CookZilla</a>
+        </div>
+        <div class="search">
+            <form id="search" method="post" action="" enctype="multipart/form-data">
+                <div><input id="searchText" name="search" type="text" placeholder="Find a recipe"></div>
+                <div id="tag">Tag<span class="caret"></span></div>
+                <div style="margin-top: 3px;"><button class="btn btn-default">Search</button></div>
+            </form>
+        </div>
+        <div id="username"><?php echo $_SESSION['username'];?></div>
+    </div>
+    
     <div id="tagContent" class="hidden">
 
     </div>
-    <ul id="menu" class="menu">
-        <li><a href="./home.php">CookZilla</a></li>
-        <li class="search">
-            <input id="search" name="search" class="searchText" type="text" placeholder="Find a recipe">
-        </li>
-        <li class="tag">
-            <a href="#" id="tag" onclick="">Tag<span class="caret"></span></a>
-        </li>
-        <li style="margin-right: 300px;"><button class="btn btn-default">Search</button></li>
-        <li>
-            <a href="#" data-toggle="dropdown" aria-expanded="false" style="font-size: 25px">
-                <?php
-                echo $_SESSION['username'];
-                ?>
-            </a>
-        </li>
-    </ul>
+    
 
     <div class="container">
         <div class="row">
