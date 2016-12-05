@@ -11,21 +11,28 @@ session_start();
 </head>
 <body>
 <div class="body">
+    <?php
+        if($_SESSION['username'] == null) {
+            echo "<script>window.location.href = './login.php';</script>";
+        }
+    ?>
+    <div id="tagContent" class="hidden">
+
+    </div>
     <ul id="menu" class="menu">
         <li><a href="./home.php">CookZilla</a></li>
         <li class="search">
             <input id="search" name="search" class="searchText" type="text" placeholder="Find a recipe">
         </li>
         <li class="tag">
-            <a href="#" data-toggle="dropdown" aria-expanded="false">Tag<span class="caret"></span></a>
+            <a href="#" id="tag" onclick="">Tag<span class="caret"></span></a>
         </li>
-        <li class="button"><button class="btn btn-default" style="">Search</button></li>
+        <li style="margin-right: 300px;"><button class="btn btn-default">Search</button></li>
         <li>
             <a href="#" data-toggle="dropdown" aria-expanded="false" style="font-size: 25px">
                 <?php
                 echo $_SESSION['username'];
                 ?>
-<!--                <span class="caret"></span>-->
             </a>
         </li>
     </ul>
@@ -33,7 +40,9 @@ session_start();
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-sm-9">
-
+                <div class="jumbotron">
+                    Welcome
+                </div>
             </div>
             <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
                 <div class="list-group">
