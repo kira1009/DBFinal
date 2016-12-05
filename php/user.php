@@ -11,8 +11,10 @@ require 'db_connect.php';
 require 'common_util.php';
 
 //initialize DB connection
-sessionDestroy();
+//sessionDestroy();
 $connection = connectDb();
+sessionDestroy();
+session_start();
 if (mysqli_connect_errno()) {
     echo "Failed to connect to MySQL: (" . mysqli_connect_errno() . ") " . mysqli_connect_error();
     $connection = null;
