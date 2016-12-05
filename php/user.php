@@ -11,6 +11,7 @@ require 'db_connect.php';
 require 'common_util.php';
 
 //initialize DB connection
+sessionDestroy();
 $connection = connectDb();
 if (mysqli_connect_errno()) {
     echo "Failed to connect to MySQL: (" . mysqli_connect_errno() . ") " . mysqli_connect_error();
@@ -37,6 +38,10 @@ if($response[0] == true) {
 
 $connection->close();
 
+/**
+ * @param $connection
+ * @return mixed
+ */
 function register_user($connection) {
 
     //check whether the input is valid
@@ -111,6 +116,10 @@ function register_user($connection) {
     return $response;
 }
 
+/**
+ * @param $connection
+ * @return mixed
+ */
 function user_login($connection) {
     //check whether the input is valid
     $username = cleanInput($_POST['username'], 32, $connection);

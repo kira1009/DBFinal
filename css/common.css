@@ -5,6 +5,10 @@ body{
     font-family: "Helvetica Neue";
 }
 
+.hidden{
+    display: none;
+}
+
 .register{
     max-width: 400px;
     padding:19px 29px 29px;
@@ -119,7 +123,10 @@ body{
 }
 
 .button{
-    margin-right:300px;
+    font-size: 25px;
+    border-radius: 4px;
+    border:1px solid;
+    margin-right:3px;
 }
 
 .menu li:hover {
@@ -130,6 +137,7 @@ body{
     line-height: 15px;
     position:relative;
 }
+
 .category img{
     cursor: pointer;
 }
