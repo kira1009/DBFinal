@@ -6,7 +6,8 @@
  * Time: 2:08 AM
  */
 require 'db_connect.php';
-
+require 'common_util.php';
+var_dump(getUserRecipe("kira1009"));
 /**
  * get all the tags from database
  */
@@ -14,7 +15,43 @@ function getTags() {
     $conn = connectDb();
     $sql = "SELECT tname FROM Tag";
     $res = $conn->query($sql);
-    $result = $res->fetch_all(MYSQLI_NUM);
+    $result = $res->fetch_all(MYSQLI_ASSOC);
+    $conn->close();
+    return $result;
+}
+
+/**
+ * get user's uploaded recipes
+ * @param $username
+ * @return mixed
+ */
+function getUserRecipe($username) {
+    $conn = connectDb();
+    $username = cleanInput($username);
+    $sql = "SELECT rid, rtitle, rimage FROM Recipe WHERE uname=? ORDER BY TIMESTAMP";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('s', $username);
+    $stmt->execute();
+    $res = $stmt->get_result();
+    $result = $res->fetch_all(MYSQLI_ASSOC);
+    $conn->close();
+    return $result;
+}
+
+/**
+ * get user's recently viewed recipes
+ * @param $username
+ * @return mixed
+ */
+function getUserRecipe($username) {
+    $conn = connectDb();
+    $username = cleanInput($username);
+    $sql = "SELECT rid, rtitle, rimage FROM Recipe WHERE uname=? ORDER BY TIMESTAMP";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('s', $username);
+    $stmt->execute();
+    $res = $stmt->get_result();
+    $result = $res->fetch_all(MYSQLI_ASSOC);
     $conn->close();
     return $result;
 }

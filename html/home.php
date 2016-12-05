@@ -41,7 +41,21 @@ session_start();
         <div class="row">
             <div class="col-xs-12 col-sm-9">
                 <div class="jumbotron">
-                    Welcome
+                    Welcome to our website <?php echo $_SESSION['username']?>
+                    <br>
+                    <a href="createrecipe.php" class="btn btn-primary">Create your recipe</a>
+                </div>
+                <div class="row">
+                    <h3>Your recipes</h3>
+                    <hr>
+                    <?php
+
+                    ?>
+                </div>
+                <div class="row">
+                    <h3>Recent viewed</h3>
+                    <hr>
+                    <!--                        recipes -->
                 </div>
             </div>
             <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
