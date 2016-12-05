@@ -104,6 +104,7 @@ function register_user($connection) {
         return $response;
     }
     $stmt->close();
+    $_SESSION['username'] = $username;
     $response[0] = true;
     $response[1] = "Successfully registered";
     return $response;
@@ -153,6 +154,7 @@ function user_login($connection) {
         return $response;
     }
     $stmt0->close();
+    $_SESSION['username'] = $username;
     $response[0] = true;
     $response[1] = 'Successfully login';
     return $response;

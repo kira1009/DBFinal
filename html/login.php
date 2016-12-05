@@ -1,6 +1,5 @@
 <?php
 session_start();
-$_POST['origin'] = '0'; //0-login; 1-register.
 ?>
 <html lang="en">
 <head>
