@@ -44,8 +44,9 @@ function register_user($connection) {
     $name = cleanInput($_POST['realname'], 255, $connection);
     $password = cleanInput($_POST['password'], 255, $connection);
     $profile = cleanInput($_POST['profile'], 255, $connection);
-
-    if($username == null || $name == null || $password == null) {
+    $uicon = uploadImage($_FILES["uicon"], "../img/uicon/", $username, $connection);
+//    echo "<script>alert('".$uicon."');</script>";
+    if($username == null || $name == null || $password == null || $uicon == null) {
         $response[0] = false;
         $response[1] = 'Illegal input, go back to register page';
         return $response;
@@ -85,13 +86,13 @@ function register_user($connection) {
     $stmt0->close();
 
     // insert user's information into user table
-    if (!($stmt = $connection->prepare("INSERT INTO User VALUES (?, ?, ?, ?, NULL)"))) {
+    if (!($stmt = $connection->prepare("INSERT INTO User VALUES (?, ?, ?, ?, ?)"))) {
         $response[0] = false;
         $response[1] = 'DB statement prepare error';
         $stmt->close();
         return $response;
     }
-    if(!$stmt->bind_param('ssss', $username, $name, $profile, md5($password))) {
+    if(!$stmt->bind_param('sssss', $username, $name, $profile, md5($password), $uicon)) {
         $response[0] = false;
         $response[1] = 'DB parameter bind error';
         $stmt->close();

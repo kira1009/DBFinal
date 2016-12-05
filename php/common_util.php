@@ -32,3 +32,36 @@
         setcookie(session_name(),'',time()-3600);
         $_SESSION = array();
     }
+    /**
+     * check the upload images
+     * @param $input: $_FILES[""]
+     * @param $path: directory of image, coule be "uicon/", "recipeImg/", "reviewImg/" or "eventImg/"
+     * @param $username
+     */
+    function uploadImage($input, $path, $username, $connection) {
+        if (isset($input)) {
+            $errors= array();
+            $file_size = $input['size'];
+            $file_tmp = $input['tmp_name'];
+            $file_ext = strtolower(end(explode('.',$input['name'])));
+            $extensions= array("jpeg","jpg","png");
+
+            if (in_array($file_ext, $extensions) === false){
+                $errors[]="extension not allowed, please choose a JPEG or PNG file.";
+            }
+
+            if ($file_size > 2097152) {
+                $errors[]='File size must be less than 2 MB';
+            }
+
+            if (empty($errors)==true) {
+                $newPath = $path . $username . "." . $file_ext;
+                move_uploaded_file($file_tmp, $newPath);
+                echo "You have successfully uploaded your profile image!";
+                return mysqli_real_escape_string($connection, $newPath);
+            } else {
+                print_r($errors);
+            }
+        }
+        return null;
+    }

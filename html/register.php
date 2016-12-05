@@ -17,7 +17,7 @@ session_start();
         <li><a href="register.php" class="button">Sign Up</a></li>
     </ul>
 
-    <form id="register" class="register" method="post" action="../php/user.php">
+    <form id="register" class="register" method="post" action="../php/user.php" enctype="multipart/form-data">
         <h3 class="formTitle">Sign Up</h3>
         <hr>
         <div class="form-group">
@@ -32,6 +32,9 @@ session_start();
         </div>
         <div class="form-group">
             <textarea id="profile" name="profile" placeholder="Enter your self description here" class="formInput formText" maxlength="255"></textarea>
+        </div>
+        <div class="form-group">
+            <input id="uicon" name="uicon" type="file" required class="formInput">
         </div>
         <button type="submit" class="btn btn-primary">Sign up for CookZilla</button>
     </form>
