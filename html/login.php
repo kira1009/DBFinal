@@ -12,11 +12,11 @@ session_start();
 <body>
 <div class="body">
     <div class="header">
-        <div id="goHome">CookZilla</div>
+        <div id="goHome"><a href="../index.html">CookZilla</a></div>
         <div class="signButton" style="margin-right: 100px;"><a href="html/register.php">Sign Up</a></div>
         <div class="signButton"><a href="html/login.php">Sign In</a></div>
     </div>
-
+    
     <form id="login" class="register" method="post" style="margin-bottom: 300px" action="../php/user.php">
         <h3 class="formTitle">Sign In</h3>
         <hr>
