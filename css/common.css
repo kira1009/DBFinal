@@ -2,49 +2,43 @@ body{
     width:100%;
     position:relative;
     margin:auto;
-    font-family: "Helvetica Neue";
+    font-family: Garamond;
 }
 
-.hidden{
-    display: none;
+/******** header ********/
+.header {
+    width:100%;
+    height:35px;
+    padding: 9px 0 10px;
+    margin:auto;
+    margin-bottom: 30px;
+    position: relative;
+    background-color: yellowgreen;
+    font-family: Garamond;
+    text-align: center;
+    position: relative;
+    color: white;
 }
 
-.register{
-    max-width: 400px;
-    padding:19px 29px 29px;
-    margin: 50px auto 150px;
-    background-color: white;
-    border: 1px solid gray;
-    border-radius: 5px;
+#goHome{
+    float:left;
+    margin-left: 100px;
+    font-size: 30px;
 }
 
-.formTitle{
-    font-size: 24px;
-    margin-top: 20px;
-    margin-bottom: 10px;
-
-}
-
-.formInput{
-    display: block;
-    width: 100%;
-    height: 34px;
-    padding: 6px 12px;
-    font-size: 14px;
-    line-height: 1.42857143;
-    color: #555;
-    background-color: #fff;
-    border: 1px solid #ccc;
+.signButton{
+    float:right;
+    margin-right: 20px;
+    font-size: 25px;
     border-radius: 4px;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
-    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    border:1px solid;
+    padding:2px 2px 2px 2px;
 }
 
-.formText{
-    height: 100px;
+.header a{
+    color:white;
+    text-decoration : none;
+
 }
 
 .footer{
@@ -58,43 +52,11 @@ body{
     color: black;
     font-size: 20px;
     font-weight: bold;
-    font-family:"Courier New";
+    font-family:Garamond;
     font-style: oblique;
 }
 
-/******** Menu ********/
-.menu {
-    width:100%;
-    padding: 9px 0 10px;
-    margin:auto;
-    margin-bottom: 30px;
-    position: relative;
-    background-color: yellowgreen;
-    font-family: 'Economica', Curlz MT;
-    z-index: 99;
-    text-align: center;
-    position: relative;
-}
-.menu ul {
-    position: absolute;
-    display: none;
-}
-.menu li {
-    display: inline-block;
-    float: none;
-    font-size: 30px;
-    line-height: 15px;
-    position:relative;
-    cursor: pointer;
-}
-.menu li a {
-    text-align: center;
-    display: inline-block;
-    padding: 9px 10px 9px;
-    position: relative;
-    color: #fff;
-    text-decoration:none;
-}
+
 
 .gap{
     width: 1000px;
@@ -120,22 +82,6 @@ body{
 
 .tagSelect{
     width: 80px;
-}
-
-.button{
-    font-size: 25px;
-    border-radius: 4px;
-    border:1px solid;
-    margin-right:3px;
-}
-
-.menu li:hover {
-    background-color:#eecaf0;
-    display: inline-block;
-    float: none;
-    font-size: 30px;
-    line-height: 15px;
-    position:relative;
 }
 
 .category img{
