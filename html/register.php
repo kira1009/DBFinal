@@ -7,27 +7,36 @@ session_start();
     <title>Login</title>
     <link rel="stylesheet" href="../css/common.css" type="text/css"/>
     <link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css"/>
-    <link rel="stylesheet" href="../css/login.css" type="text/css"/>
+    <link rel="stylesheet" href="../css/login_register.css" type="text/css"/>
 </head>
 <body>
 <div class="body">
     <div class="header">
         <div id="goHome">CookZilla</div>
-        <div class="signButton" style="margin-right: 100px;"><a href="html/register.php">Sign Up</a></div>
-        <div class="signButton"><a href="html/login.php">Sign In</a></div>
+        <div class="signButton" style="margin-right: 100px;"><a href="./register.php">Sign Up</a></div>
+        <div class="signButton"><a href="./login.php">Sign In</a></div>
     </div>
 
-    <form id="login" class="register" method="post" style="margin-bottom: 300px" action="../php/user.php">
-        <h3 class="formTitle">Sign In</h3>
+    <form id="register" class="register" method="post" action="../php/user.php" enctype="multipart/form-data">
+        <h3 class="formTitle">Sign Up</h3>
         <hr>
         <div class="form-group">
             <input autofocus="autofocus" id="username" maxlength="32" minlength="1" name="username" placeholder="Username" type="text" required class="formInput">
-            <input type="hidden" id="origin" name="origin" value="0">
+            <input type="hidden" id="origin" name="origin" value="1">
+        </div>
+        <div class="form-group">
+            <input autofocus="autofocus" id="realname" maxlength="255" minlength="1" name="realname" placeholder="Real name" type="text" required class="formInput">
         </div>
         <div class="form-group">
             <input id="password" name="password" placeholder="Password" type="password" required class="formInput">
         </div>
-        <button type="submit" class="btn btn-primary">Login</button>
+        <div class="form-group">
+            <textarea id="profile" name="profile" placeholder="Enter your self description here" class="formInput formText" maxlength="255"></textarea>
+        </div>
+        <div class="form-group">
+            <input id="uicon" name="uicon" type="file" required class="formInput">
+        </div>
+        <button type="submit" class="btn btn-primary">Sign up for CookZilla</button>
     </form>
 
     <div class="footer">
