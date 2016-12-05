@@ -12,9 +12,15 @@ session_start();
 <body>
 <div class="body">
     <div class="header">
-        <div id="goHome">CookZilla</div>
-        <div class="signButton" style="margin-right: 100px;"><a href="./register.php">Sign Up</a></div>
-        <div class="signButton"><a href="./login.php">Sign In</a></div>
+        <div id="goHome">
+            <a href="../index.html" style="text-decoration : none;">CookZilla</a>
+        </div>
+        <div class="signButton" style="margin-right: 100px;">
+            <a href="./register.php" style="text-decoration : none;">Sign Up</a>
+        </div>
+        <div class="signButton">
+            <a href="./login.php" style="text-decoration : none;"z>Sign In</a>
+        </div>
     </div>
 
     <form id="register" class="register" method="post" action="../php/user.php" enctype="multipart/form-data">
