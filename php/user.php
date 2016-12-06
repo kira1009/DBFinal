@@ -1,10 +1,3 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-    <link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css"/>
-</head>
-<body>
 <?php
 
 require 'db_connect.php';
@@ -172,6 +165,9 @@ function user_login($connection) {
     return $response;
 }
 ?>
+<html lang="en">
+<head>
+</head>
+<body>
 </body>
 </html>
-
