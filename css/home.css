@@ -35,7 +35,7 @@
 }
 
 .tags{
-    visibility: hidden;
+    /*visibility: hidden;*/
     color: black;
     background-color: yellowgreen;
     margin: auto

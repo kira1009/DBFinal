@@ -13,7 +13,7 @@ session_start();
     <script type="text/javascript">
         $(document).ready(function(){
             $("#tag").click(function(){
-                $("#tags").css("visibility","visible");
+                $("#tags").toggle();
             });
         });
     </script>
@@ -45,8 +45,8 @@ session_start();
                 $count = $count + 1;
             }
             ?>
-            <button class="btn btn-default" style="float: right">Cancel</button>
-            <button class="btn btn-primary" style="float: right">OK</button>
+            <div id="addTag" class="btn btn-default" style="float: right">Cancel</div>
+            <div id="cancelTag" class="btn btn-primary" style="float: right; margin-right: 3px;">OK</div>
         </div>
 
         </form>
