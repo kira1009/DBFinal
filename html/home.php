@@ -27,7 +27,7 @@ session_start();
             <div id="goHome">
                 <a href="home.php" style="text-decoration: none;">CookZilla</a>
             </div>
-            <form id="search" method="post" action="../php/search.php" enctype="multipart/form-data">
+            <form method="post" action="../html/search.php" enctype="multipart/form-data">
                 <div class="search">
                     <div>
                         <input id="searchText" name="search" type="text" placeholder="Find a recipe" style="color: grey;">
@@ -36,7 +36,7 @@ session_start();
                         Tag<span class="caret"></span>
                     </div>
                     <div style="margin-top: 3px;">
-                        <button class="btn btn-default">Search</button>
+                        <button class="btn btn-default" style="color: yellowgreen">Search</button>
                     </div>
                 </div>
                 <script type="text/javascript">
@@ -63,6 +63,7 @@ session_start();
             </form>
             <div id="username">
                 <?php echo $_SESSION['username'];?>
+                <a href="logout.php"  style="margin-left: 15px;text-decoration: none;">Sign Out</a>
             </div>
         </div>
     </div>
