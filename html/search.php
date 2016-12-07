@@ -1,5 +1,14 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: cagekira
+ * Date: 12/7/16
+ * Time: 2:40 AM
+ */
 session_start();
+$searchText = $_POST['search'];
+$tags = $_POST['selectedTag'];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,16 +27,11 @@ session_start();
 </head>
 <body>
     <div class="body">
-        <?php
-            if($_SESSION['username'] == null) {
-                echo "<script>window.location.href = './login.php';</script>";
-            }
-        ?>
         <div class="header">
             <div id="goHome">
                 <a href="home.php" style="text-decoration: none;">CookZilla</a>
             </div>
-            <form method="post" action="../html/search.php" enctype="multipart/form-data">
+            <form id="search" method="post" action="../html/search.php" enctype="multipart/form-data">
                 <div class="search">
                     <div>
                         <input id="searchText" name="search" type="text" placeholder="Find a recipe" style="color: grey;">
@@ -36,7 +40,7 @@ session_start();
                         Tag<span class="caret"></span>
                     </div>
                     <div style="margin-top: 3px;">
-                        <button class="btn btn-default" style="color: yellowgreen">Search</button>
+                        <button class="btn btn-default">Search</button>
                     </div>
                 </div>
                 <div id="username">
@@ -53,8 +57,8 @@ session_start();
                     require '../php/db_query.php';
                     $count = 1;
                     foreach (getTags() as $element) {
-                       echo "<div id='tagOption".$count."' style='width: 30%'><input type='checkbox' name=selectedTag[] value=".$element['tname']." style='width: 20px; float:left;'/><label>".$element['tname']."</label></div>";
-                      $count = $count + 1;
+                        echo "<div id='tagOption".$count."' style='width: 30%'><input type='checkbox' name=selectedTag[] value=".$element['tname']." style='width: 20px; float:left;'/><label>".$element['tname']."</label></div>";
+                        $count = $count + 1;
                     }
                     ?>
                     <div id="addTag" class="btn btn-primary">OK</div>
@@ -66,46 +70,13 @@ session_start();
                 </div>
             </form>
         </div>
-    </div>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-sm-9">
-                <div class="jumbotron">
-                    <h3>Welcome to our website <?php echo $_SESSION['username']?>!</h3>
-                    <br>
-                    <a href="createrecipe.php" class="btn btn-primary">Create your recipe</a>
-                </div>
-                <div class="row">
-                    <h3>Your recipes</h3>
-                    <hr>
-                    <?php
-
-                    ?>
-                </div>
-                <div class="row">
-                    <h3>Recent viewed</h3>
-                    <hr>
-                    <!--                        recipes -->
-                </div>
-            </div>
-            <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
-                <div class="list-group">
-                    <div class="list-group-item">
-                        <h4>Group</h4>
-                    </div>
-                    <div class="list-group-item">
-                        <h4>Events</h4>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
     <div class="footer">
         <div>Copyright &copy; CookZilla TM. All Right Reserved.</div>
         <div>ADDRESS: 5 MetroTech, Brooklyn, 11201</div>
         <div>EMAIL: CookZilla@gmail.com</div>
     </div>
-</div>
+    </div>
 </body>
 </html>

@@ -8,7 +8,6 @@
 require 'db_connect.php';
 require 'common_util.php';
 
-//var_dump(getUserGroupButNoRsvpEvent("kira1009"));
 /**
  * get all the tags from database
  */
