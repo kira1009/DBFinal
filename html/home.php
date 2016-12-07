@@ -47,7 +47,7 @@ session_start();
                         $("#tags").toggle();
                     });
                 </script>
-                <div id="tags" class="tags">
+                <div id="tags">
                     <?php
                     require '../php/db_query.php';
                     $count = 1;
@@ -56,7 +56,7 @@ session_start();
                       $count = $count + 1;
                     }
                     ?>
-                    <div id="addTag" class="btn btn-primary" style="float: right; margin-right: 3px;">OK</div>
+                    <div id="addTag" class="btn btn-primary">OK</div>
                     <script>
                         $("#addTag").click(function () {
                             $("#tags").hide();
