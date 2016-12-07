@@ -39,15 +39,12 @@ session_start();
                         <button class="btn btn-default">Search</button>
                     </div>
                 </div>
-                <div id="username">
-                    <?php echo $_SESSION['username'];?>
-                </div>
                 <script type="text/javascript">
                     $("#tag").click(function(){
                         $("#tags").toggle();
                     });
                 </script>
-                <div id="tags">
+                <div id="tags" class="tags">
                     <?php
                     require '../php/db_query.php';
                     $count = 1;
@@ -56,7 +53,7 @@ session_start();
                       $count = $count + 1;
                     }
                     ?>
-                    <div id="addTag" class="btn btn-primary">OK</div>
+                    <div id="addTag" class="btn btn-primary" style="float: right; margin-right: 3px;">OK</div>
                     <script>
                         $("#addTag").click(function () {
                             $("#tags").hide();
@@ -64,6 +61,9 @@ session_start();
                     </script>
                 </div>
             </form>
+            <div id="username">
+                <?php echo $_SESSION['username'];?>
+            </div>
         </div>
     </div>
 
