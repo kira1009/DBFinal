@@ -1,4 +1,5 @@
 <?php
+require '../php/db_query.php';
 session_start();
 ?>
 <!DOCTYPE html>
@@ -19,7 +20,8 @@ session_start();
 <body>
     <div class="body">
         <?php
-            if($_SESSION['username'] == null) {
+            $username = $_SESSION['username'];
+            if($username == null) {
                 echo "<script>window.location.href = './login.php';</script>";
             }
         ?>
@@ -40,7 +42,7 @@ session_start();
                     </div>
                 </div>
                 <div id="username">
-                    <?php echo $_SESSION['username'];?>
+                    <?php echo $username;?>
                     <a href="logout.php" class="btn btn-default" style="color:yellowgreen;">sign out</a>
                 </div>
                 <script type="text/javascript">
@@ -50,7 +52,6 @@ session_start();
                 </script>
                 <div id="tags">
                     <?php
-                    require '../php/db_query.php';
                     $count = 1;
                     foreach (getTags() as $element) {
                        echo "<div id='tagOption".$count."' style='width: 30%'><input type='checkbox' name=selectedTag[] value=".$element['tname']." style='width: 20px; float:left;'/><label>".$element['tname']."</label></div>";
@@ -93,6 +94,9 @@ session_start();
                 <div class="list-group">
                     <div class="list-group-item">
                         <h4>Group</h4>
+                        <?php
+                            $group = getUserGroup($username);
+                        ?>
                     </div>
                     <div class="list-group-item">
                         <h4>Events</h4>
