@@ -76,3 +76,9 @@
     background-color: yellowgreen;
     border-color: yellowgreen;
 }
+
+.recipeImg{
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+}

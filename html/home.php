@@ -96,7 +96,7 @@ session_start();
                             $pageContent = "<div class='col-xs-6 col-lg-4'><h4>";
                             $pageContent = $pageContent.$recipe['rtitle']."</h4>";
                             $imgDir = explode(';', $recipe['rimage'])[0];
-                            $pageContent = $pageContent."<p><img src='".$imgDir."' onerror=\"this.src='../img/default.jpg'\"/>";
+                            $pageContent = $pageContent."<p><img src='".$imgDir."' class='recipeImg' onerror=\"this.src='../img/default.jpg'\"/>";
                             $pageContent = $pageContent."<p><a class='btn btn-default' href='recipe.php#id=".$recipe['rid']."'role='button'>View details »</a></p></div>";
                             echo $pageContent;
                         }
