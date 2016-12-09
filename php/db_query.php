@@ -63,7 +63,7 @@ function getUserViewedRecipe($username) {
 function getUserGroup($username) {
     $conn = connectDb();
     $username = cleanInput($username, 32, $conn);
-    $sql = "SELECT g.gid, g.gname from Groups g, GroupMember gm WHERE g.gid = gm.gid AND gm.uname=?";
+    $sql = "SELECT g.gname from Groups g, GroupMember gm WHERE g.gid = gm.gid AND gm.uname=?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('s', $username);
     $stmt->execute();
@@ -80,7 +80,7 @@ function getUserGroup($username) {
 function getRsvpEvent($username) {
     $conn = connectDb();
     $username = cleanInput($username, 32, $conn);
-    $sql = "SELECT etitle, er.eid FROM EventRSVP er, Events e WHERE er.uname=? and er.eid = e.eid ORDER BY etime";
+    $sql = "SELECT etitle, er.eid FROM EventRSVP er, Events e WHERE er.uname=? ORDER BY etime";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('s', $username);
     $stmt->execute();
@@ -92,7 +92,7 @@ function getRsvpEvent($username) {
 
 /**
  * get user not rsvped but in usr's group events
- * @param $username
+ * @param $usrname
  */
 function getUserGroupButNoRsvpEvent($username) {
     $conn = connectDb();
@@ -106,42 +106,15 @@ function getUserGroupButNoRsvpEvent($username) {
     $conn->close();
     return $result;
 }
-
-/**
- * get group users by group id
- * @param $groupId
- * @return mixed
- */
-function getGroupUsersById($groupId) {
+function getMaxRid() {
     $conn = connectDb();
-    $groupId = cleanInput($groupId, 10, $conn);
-    $sql = "SELECT uname FROM GroupMember WHERE gid = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param('s', $groupId);
-    $stmt->execute();
-    $res = $stmt->get_result();
-    $result = $res->fetch_all(MYSQLI_ASSOC);
+//    $stmt = $conn->query("SELECT MAX(rid) AS rid FROM Recipe");
+//    $res = $stmt->get_result();
+//    $result = $res->fetch_all(MYSQLI_ASSOC);
+    $result = mysqli_query($conn, "SELECT MAX(rid) AS rid FROM Recipe");
     $conn->close();
+    var_dump($result->fetch_all(MYSQLI_ASSOC));
     return $result;
 }
 
-/**
- *
- * @param $username
- */
-function hasAGroup($username) {
-    $conn = connectDb();
-    $username = cleanInput($username, 32, $conn);
-    $sql = "SELECT count(*) as count FROM GroupMember WHERE uname = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param('s', $username);
-    $stmt->execute();
-    $res = $stmt->get_result();
-    $result = $res->fetch_all(MYSQLI_ASSOC);
-    $conn->close();
-    $groupCount = $result[0]['count'];
-    if($groupCount < 1) {
-        return false;
-    }
-    return true;
-}
+getMaxRid();
