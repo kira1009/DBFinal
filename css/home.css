@@ -9,7 +9,7 @@
 }
 
 .search{
-    margin-left: 200px;
+    margin-left: 100px;
     width: 600px;
 }
 
@@ -41,7 +41,7 @@
     width: 300px;
     position: absolute;
     top: 40px;
-    right: 100px;
+    right: 200px;
     background-color: yellowgreen;
     margin-top: 10px;
     float: right;
@@ -56,4 +56,23 @@
     border: none;
     margin-bottom: 5px;
     margin-right: 5px;
+}
+
+.eventStat{
+    margin-right:3px;
+    float:right;
+}
+
+.rightColTitle{
+    background-color: #eee;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 6px;
+    padding-left: 2px;
+    margin:auto;
+}
+
+.creatButton{
+    background-color: yellowgreen;
+    border-color: yellowgreen;
 }
