@@ -105,7 +105,21 @@ session_start();
                 <div class="row">
                     <h3>Recent viewed</h3>
                     <hr>
-                    <!--                        recipes -->
+                    <?php
+                    $count = 0;
+                    $recipes = getUserViewedRecipe($username);
+                    $recipeNum = sizeof($recipes);
+                    foreach ($recipes as $recipe) {
+                        if($count > 2) break;
+                        $count++;
+                        $pageContent = "<div class='col-xs-6 col-lg-4'><h4>";
+                        $pageContent = $pageContent.$recipe['rtitle']."</h4>";
+                        $imgDir = explode(';', $recipe['rimage'])[0];
+                        $pageContent = $pageContent."<p><img src='".$imgDir."' onerror=\"this.src='../img/default.jpg'\"/>";
+                        $pageContent = $pageContent."<p><a class='btn btn-default' href='recipe.php#id=".$recipe['rid']."'role='button'>View details »</a></p></div>";
+                        echo $pageContent;
+                    }
+                    ?>
                 </div>
             </div>
             <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
