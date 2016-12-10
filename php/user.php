@@ -44,8 +44,7 @@ function register_user($connection) {
     $name = cleanInput($_POST['realname'], 255, $connection);
     $password = cleanInput($_POST['password'], 255, $connection);
     $profile = cleanInput($_POST['profile'], 255, $connection);
-    $uicon = uploadImage($_FILES["uicon"], "../img/uicon/", $username, $connection);
-//    echo "<script>alert('".$uicon."');</script>";
+    $uicon = uploadIcon($_FILES["uicon"], "../img/uicon/", $username, $connection);
     if($username == null || $name == null || $password == null || $uicon == null) {
         $response[0] = false;
         $response[1] = 'Illegal input, go back to register page';
