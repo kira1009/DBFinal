@@ -108,13 +108,24 @@ function getUserGroupButNoRsvpEvent($username) {
 }
 function getMaxRid() {
     $conn = connectDb();
-//    $stmt = $conn->query("SELECT MAX(rid) AS rid FROM Recipe");
-//    $res = $stmt->get_result();
-//    $result = $res->fetch_all(MYSQLI_ASSOC);
-    $result = mysqli_query($conn, "SELECT MAX(rid) AS rid FROM Recipe");
+    $res = mysqli_query($conn, "SELECT MAX(rid) AS rid FROM Recipe");
     $conn->close();
-    var_dump($result->fetch_all(MYSQLI_ASSOC));
+    $result = $res->fetch_all(MYSQLI_ASSOC);
     return $result;
 }
 
-getMaxRid();
+function getMaxEid() {
+    $conn = connectDb();
+    $res = mysqli_query($conn, "SELECT MAX(eid) AS eid FROM Events");
+    $conn->close();
+    $result = $res->fetch_all(MYSQLI_ASSOC);
+    return $result;
+}
+
+function getMaxRRid() {
+    $conn = connectDb();
+    $res = mysqli_query($conn, "SELECT MAX(rrid) AS rrid FROM RecipeReview");
+    $conn->close();
+    $result = $res->fetch_all(MYSQLI_ASSOC);
+    return $result;
+}

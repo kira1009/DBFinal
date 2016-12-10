@@ -75,7 +75,7 @@ session_start();
     </div>
 
     <div>
-        <form id="create_recipe" action="./checkrecipe.php" method="post" style="width: 60%; margin-left: 20%">
+        <form id="create_recipe" action="./checkrecipe.php" method="post" style="width: 60%; margin-left: 20%" enctype="multipart/form-data">
             <div class="form-group">
                 <p style="text-align: center; font-size: medium; font-weight: bold;">Title</p>
                 <input type="text" class="form-control" name="title" id="recipe_title" maxlength="255" placeholder="Enter your recipe title">

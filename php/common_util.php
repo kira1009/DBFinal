@@ -67,15 +67,42 @@
         }
         return null;
     }
-    function uploadRecipeImg($file, $path, $username, $connection) {
-        if (isset($input)) {
+    function uploadImg($file, $path, $connection) {
+        if (empty($file) == false) {
             $errors= array();
-            $rid = getMaxRid()['rid'];
-            foreach ($file as $input) {
+            if ($path == '../img/recipeImg/') {
+                $maxRid = getMaxRid()[0]['rid'];
+                if ($maxRid == NULL) {
+                    $count = 0;
+                } else {
+                    $count = $maxRid + 1;
+                }
+            } else if ($path == '../img/eventImg/') {
+                $maxEid = getMaxEid()[0]['eid'];
+                if ($maxEid == NULL) {
+                    $count = 0;
+                } else {
+                    $count = $maxEid + 1;
+                }
+            } else if ($path == '../img/reviewImg/') {
+                $maxRRid = getMaxRRid()[0]['rrid'];
+                if ($maxRRid == NULL) {
+                    $count = 0;
+                } else {
+                    $count = $maxRRid + 1;
+                }
+            } else {
+                $errors[] = 'Input path invalid!';
+            }
 
-                $file_size = $input['size'];
-                $file_tmp = $input['tmp_name'];
-                $file_ext = strtolower(end(explode('.',$input['name'])));
+            $result = '';
+            $num = 1;
+            $file_count = count($file['name']);
+//            echo "<script>alert(" . $file_count . ");</script>";
+            for ($i = 0; $i < $file_count; $i++) {
+                $file_size = $file['size'][$i];
+                $file_tmp = $file['tmp_name'][$i];
+                $file_ext = strtolower(end(explode('.',$file['name'][$i])));
                 $extensions= array("jpeg","jpg","png");
 
                 if (in_array($file_ext, $extensions) === false){
@@ -86,16 +113,19 @@
                     $errors[]='File size must be less than 2 MB';
                 }
 
-                if (empty($errors)==true) {
-                    $newPath = $path . $username . "." . $file_ext;
+                if (empty($errors) == true) {
+                    $newPath = $path . $count . "_" . $num . "." . $file_ext;
                     move_uploaded_file($file_tmp, $newPath);
-                    echo "You have successfully uploaded your profile image!";
-                    return mysqli_real_escape_string($connection, $newPath);
-                } else {
-                    print_r($errors);
+                    $result = $result . $newPath . ";";
+                    $num++;
                 }
             }
-
+            if (empty($errors) == true) {
+                return mysqli_real_escape_string($connection, $result);
+            } else {
+                print_r($errors);
+            }
+        } else {
+            return null;
         }
-        return null;
     }

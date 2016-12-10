@@ -23,9 +23,7 @@ session_start();
     </script>
 </head>
 <?php
-include_once "../php/common_util.php";
-//require "../php/db_connect.php";
-include_once "../php/db_query.php";
+require "../php/db_query.php";
 $connection = connectDb();
 $response = array();
 $title = cleanInput($_POST["title"], 255, $connection);
@@ -35,48 +33,74 @@ $ingredient = array();
 $iname = array();
 $amount = array();
 $unit = array();
-$image = array();
-foreach ($_POST["iname"] as $item) {
-    $i = cleanInput($item, 255, $connection);
-    if ($i == null) {
-        $response[0] = false;
-        $response[1] = "Illegal Input!";
-    } else {
-        array_push($iname, $i);
+$rimage = uploadImg($_FILES['image'], '../img/recipeImg/', $connection);
+if (is_array($_POST["iname"])) {
+    foreach ($_POST["iname"] as $item) {
+        $i = cleanInput($item, 255, $connection);
+        if ($i != null) {
+            array_push($iname, $i);
+        } else {
+            $response[0] = false;
+            $response[1] = "Illegal Input!";
+        }
     }
+} else {
+    $response[0] = false;
+    $response[1] = "Illegal Input!";
+}
+if (is_array($_POST["amount"])) {
+    foreach ($_POST["amount"] as $item) {
+        if ($item != null) {
+            array_push($amount, $item);
+        } else {
+            $response[0] = false;
+            $response[1] = "Illegal Input!";
+        }
+    }
+} else {
+    $response[0] = false;
+    $response[1] = "Illegal Input!";
+}
 
-}
-foreach ($_POST["amount"] as $item) {
-    if ($item == null) {
-        $response[0] = false;
-        $response[1] = "Illegal Input!";
-    } else {
-        array_push($iname, $item);
-    }
-}
-foreach ($_POST["unit"] as $item) {
-    if ($item == null) {
-        $response[0] = false;
-        $response[1] = "Illegal Input!";
-    } else {
+if (is_array($_POST["unit"])) {
+    foreach ($_POST["unit"] as $item) {
         array_push($unit, $item);
     }
+} else {
+    $response[0] = false;
+    $response[1] = "Illegal Input!";
 }
-foreach ($_FILES["image"] as $item) {
-    if ($item == null) {
-        $response[0] = false;
-        $response[1] = "Illegal Input!";
-    } else {
-        array_push($unit, $item);
-    }
+// insert user's recipe into Recipe table
+if (!($stmt = $connection->prepare("INSERT INTO Recipe (uname, rtitle, serving, rtext, rimage, timestamp) VALUES (?, ?, ?, ?, ?, ?)"))) {
+    $response[0] = false;
+    $response[1] = 'DB statement prepare error';
+    $stmt->close();
+    return $response;
+}
+if(!$stmt->bind_param('ssisss', $_SESSION['username'], $title, $serving, $rtext, $rimage, date("Y-m-d H:i:s"))) {
+    $response[0] = false;
+    $response[1] = 'DB parameter bind error';
+    $stmt->close();
+    return $response;
+}
+if(!$stmt->execute()) {
+    $response[0] = false;
+    $response[1] = 'DB statement execute error';
+    $stmt->close();
+    return $response;
+}
+$stmt->close();
+//$_SESSION['username'] = $username;
+$response[0] = true;
+$response[1] = "Successfully submit your recipe!";
+//process return
+echo "<script>alert('".$response[1]."');</script>";
+if($response[0] == true) {
+    echo "<script>window.location.href = '../html/home.php';</script>";
+}else {
+    echo "<script>window.history.go(-1)</script>";
 }
 ?>
 <body>
-<?php //$result = getMaxRid(); while ($row = $result->fetch_assoc()) {echo "<h1>" . $row['rid'] . "</h1>";} ?>
-<p><?= $title ?></p>
-<p><?= $response[0] . $response[1]?></p>
-<p><?= $iname[0] . "+" . $iname[1]."+".$iname[2] ?></p>
-<p><?= $amount[0]."+".$amount[1]."+".$amount[2] ?></p>
-<p><?= $unit[0]."+".$unit[1]."+".$unit[2]?></p>
 </body>
 </html>
