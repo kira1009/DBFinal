@@ -126,7 +126,7 @@ function getGroupUsersById($groupId) {
 }
 
 /**
- *
+ * check whether a user has a group
  * @param $username
  */
 function hasAGroup($username) {
@@ -145,3 +145,90 @@ function hasAGroup($username) {
     }
     return true;
 }
+
+/**
+ * get recipes for the query
+ * @param $keyword
+ * @param $tags
+ * @return array
+ */
+function getRecipeByKeywordTags($keyword, $tags) {
+    $keywordRes = getRecipeByKeyword($keyword);
+    $tagRes = getRecipeByTags($tags);
+    $record = [];
+    $result = [];
+    foreach ($keywordRes as $tmpElement) {
+        $rid = $tmpElement['rid'];
+        if(in_array($rid, $record)){
+            continue;
+        }else {
+            array_push($record, $rid);
+            array_push($result, $tmpElement);
+        }
+    }
+
+    foreach ($tagRes as $tmpElement) {
+        $rid = $tmpElement['rid'];
+        if(in_array($rid, $record)){
+            continue;
+        }else {
+            array_push($record, $rid);
+            array_push($result, $tmpElement);
+        }
+    }
+
+    return $result;
+}
+
+/**
+ * get recipe information by tags
+ * @param $tags
+ * @return mixed|null
+ */
+function getRecipeByTags($tags) {
+    $conn = connectDb();
+
+    if(empty($tags)) {
+        return null;
+    }else {
+        $sql = "SELECT DISTINCT r.rid, r.uname, r.rtitle, r.rimage FROM RecipeTag rt, Recipe r WHERE rt.rid = r.rid AND tname in ('".$tags[0]."'";
+        $size = count($tags);
+        $seq = 1;
+        while($seq < $size) {
+            $sql = $sql.","."'".$tags[$seq]."'";
+            $seq++;
+        }
+        $sql = $sql.")";
+        $res = $conn->query($sql);
+        $result = $res->fetch_all(MYSQLI_ASSOC);
+        $conn->close();
+        return $result;
+    }
+}
+
+/**
+ * get recipe information by keyword
+ * @param $keyword
+ * @return array
+ */
+function getRecipeByKeyword($keyword) {
+
+    $keyArr = explode(" ", $keyword);
+    $conn = connectDb();
+    $resultArr = [];
+    foreach($keyArr as $key) {
+        $key = cleanInput($key, 50, $conn);
+        $sql = "SELECT rid, uname, rtitle, rimage FROM Recipe WHERE rtitle LIKE ? OR rtext LIKE ?";
+        $key = "%".$key."%";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('ss', $key, $key);
+        $stmt->execute();
+        $res = $stmt->get_result();
+        $result = $res->fetch_all(MYSQLI_ASSOC);
+        $resultArr = array_merge($resultArr, $result);
+    }
+    $conn->close();
+    return $resultArr;
+}
+//$tags=['Soup'];
+//var_dump(getRecipeByKeywordTags('chicken', $tags));
