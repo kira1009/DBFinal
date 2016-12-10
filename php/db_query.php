@@ -167,6 +167,7 @@ function getRecipeByKeywordTags($keyword, $tags) {
         }
     }
 
+
     foreach ($tagRes as $tmpElement) {
         $rid = $tmpElement['rid'];
         if(in_array($rid, $record)){
@@ -189,7 +190,7 @@ function getRecipeByTags($tags) {
     $conn = connectDb();
 
     if(empty($tags)) {
-        return null;
+        return [];
     }else {
         $sql = "SELECT DISTINCT r.rid, r.uname, r.rtitle, r.rimage FROM RecipeTag rt, Recipe r WHERE rt.rid = r.rid AND tname in ('".$tags[0]."'";
         $size = count($tags);
