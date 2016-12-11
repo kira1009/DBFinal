@@ -350,3 +350,21 @@ function getRecipeReviewById($rid) {
     $conn->close();
     return $result;
 }
+
+/**
+ * find all the groups that user did not join
+ * @param $username
+ * @return mixed
+ */
+function findNotJoinedGroup($username) {
+    $conn = connectDb();
+    $username = cleanInput($username, 32, $conn);
+    $sql = "SELECT gid, gname, description FROM Groups WHERE gid NOT IN (SELECT gid FROM GroupMember WHERE uname=?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('s', $username);
+    $stmt->execute();
+    $res = $stmt->get_result();
+    $result = $res->fetch_all(MYSQLI_ASSOC);
+    $conn->close();
+    return $result;
+}
