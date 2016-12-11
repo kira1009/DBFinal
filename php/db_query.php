@@ -254,6 +254,14 @@ function getMaxRRid() {
     return $result;
 }
 
+function getMaxGid() {
+    $conn = connectDb();
+    $res = mysqli_query($conn, "SELECT MAX(gid) AS gid FROM Groups");
+    $conn->close();
+    $result = $res->fetch_all(MYSQLI_ASSOC);
+    return $result;
+}
+
 /**
  * get the detail of a recipe by its id which includes
  * the recipe's title, description, creator, serving info, images, ingredients, reviews
