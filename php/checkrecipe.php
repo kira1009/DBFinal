@@ -36,6 +36,7 @@ $amount = array();
 $unit = array();
 $thisRid = getMaxRid()[0]['rid'] + 1;
 $rimage = uploadImg($_FILES['image'], '../img/recipeImg/', $connection);
+//check and store iname, amount and unit
 if (is_array($_POST["iname"])) {
     foreach ($_POST["iname"] as $item) {
         $i = cleanInput($item, 255, $connection);
@@ -79,8 +80,9 @@ if (count($iname) !== count(array_unique($iname))) {
     $response[1] = "Illegal Input! Ingredient name invalid!";
 }
 
-// insert user's recipe into Recipe table
+
 if ($response[0] == true) {
+    // insert user's recipe into Recipe table
     if (!($stmt = $connection->prepare("INSERT INTO Recipe (uname, rtitle, serving, rtext, rimage, timestamp) VALUES (?, ?, ?, ?, ?, ?)"))) {
         $response[0] = false;
         $response[1] = 'DB statement prepare error';
@@ -100,12 +102,13 @@ if ($response[0] == true) {
         return $response;
     }
     $stmt->close();
-//$_SESSION['username'] = $username;
+    //$_SESSION['username'] = $username;
     $response[0] = true;
     $response[1] = "Successfully submit your recipe!";
-//process return
+    //process return
 
-// insert user's recipe ingredient into RecipeIngredient table
+    // insert user's recipe ingredient into RecipeIngredient table
+    $checkIname = array();
     for ($i = 0; $i < count($iname); $i++) {
         if (!($stmt = $connection->prepare("INSERT INTO RecipeIngredient VALUES (?, ?, ?, ?)"))) {
             $response[0] = false;
@@ -126,12 +129,49 @@ if ($response[0] == true) {
             return $response;
         }
         $stmt->close();
-//$_SESSION['username'] = $username;
+        //$_SESSION['username'] = $username;
         $response[0] = true;
         $response[1] = "Successfully submit your recipe!";
 
         array_push($checkIname, $iname[$i]);
-//process return
+        //process return
+    }
+
+    //insert user's recipe tags into RecipeTag table
+    $tname = array();
+    if (isset($_POST['tags'])) {
+        if (is_array($_POST['tags'])) {
+            foreach ($_POST['tags'] as $tag) {
+                array_push($tname, $tag);
+            }
+        } else {
+            array_push($tname, $_POST['tag']);
+        }
+    }
+    foreach ($tname as $tag) {
+        if (!($stmt = $connection->prepare("INSERT INTO RecipeTag VALUES (?, ?)"))) {
+            $response[0] = false;
+            $response[1] = 'DB statement prepare error';
+            $stmt->close();
+            return $response;
+        }
+        if(!$stmt->bind_param('is', $thisRid, $tag)) {
+            $response[0] = false;
+            $response[1] = 'DB parameter bind error';
+            $stmt->close();
+            return $response;
+        }
+        if(!$stmt->execute()) {
+            $response[0] = false;
+            $response[1] = 'DB statement execute error';
+            $stmt->close();
+            return $response;
+        }
+        $stmt->close();
+        //$_SESSION['username'] = $username;
+        $response[0] = true;
+        $response[1] = "Successfully submit your recipe!";
+        //process return
     }
 }
 

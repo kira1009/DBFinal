@@ -81,11 +81,20 @@ session_start();
                 <input type="text" class="form-control" name="title" id="recipe_title" maxlength="255" placeholder="Enter your recipe title">
                 <small class="form-text text-muted">You must enter your recipe title.</small>
             </div>
-            <div class="form-group">
+            <div class="form-group" i>
                 <p style="text-align: center; font-size: medium; font-weight: bold;">Serving</p>
                 <input type="number" min="0" step="1" class="form-control" name="serving" placeholder="Enter your serving">
             </div>
             <br><br><br>
+            <div class="form-group">
+                <p style="text-align: center; font-size: medium; font-weight: bold;">Tags</p>
+                <?php
+                    $tags = getTags();
+                    foreach ($tags as $tag) {
+                        echo "<input type='checkbox' name='tags[]' value='" . $tag['tname'] . "'>" . $tag['tname'] . "<br>";
+                    }
+                ?>
+            </div>
             <div>
                 <p style="text-align: center; font-size: medium; font-weight: bold;">Ingredient</p>
             </div>
