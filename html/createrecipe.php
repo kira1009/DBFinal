@@ -75,7 +75,7 @@ session_start();
     </div>
 
     <div>
-        <form id="create_recipe" action="./checkrecipe.php" method="post" style="width: 60%; margin-left: 20%" enctype="multipart/form-data">
+        <form id="create_recipe" action="../php/checkrecipe.php" method="post" style="width: 60%; margin-left: 20%" enctype="multipart/form-data">
             <div class="form-group">
                 <p style="text-align: center; font-size: medium; font-weight: bold;">Title</p>
                 <input type="text" class="form-control" name="title" id="recipe_title" maxlength="255" placeholder="Enter your recipe title">
@@ -91,6 +91,7 @@ session_start();
             </div>
             <div class="form-inline" id="ingredient" style="margin-left: 10%;"></div>
             <div align="center">
+                <br>
                 <input type="button" value="Add More Ingredients!" onclick="addIngredient()">
             </div>
             <br><br><br>
@@ -99,9 +100,10 @@ session_start();
                 <textarea class="form-control" name="step" rows="10"></textarea>
             </div>
             <br><br><br>
-            <div id="recipeImg"></div>
             <p style="text-align: center; font-size: medium; font-weight: bold;">Images:</p>
+            <div id="recipeImg" style="margin-left: 20%;"></div>
             <div align="center">
+                <br>
                 <input type="button" value="Add More Images!" onclick="addImg()">
             </div>
             <br><br><br>
@@ -123,14 +125,14 @@ session_start();
                     "<option value='item'>item</option>" +
                     "</select>" +
                     "<label>Name</label>" +
-                    "<input type='text' class='form-control' name='iname[]'>";
+                    "<input type='text' class='form-control' name='iname[]'><br>";
                 obj.appendChild(newDiv);
             }
 
             function addImg() {
                 var obj = document.getElementById("recipeImg");
                 var newDiv = document.createElement("div");
-                newDiv.innerHTML = "<input type='file' name='image[]'>";
+                newDiv.innerHTML = "<input type='file' name='image[]'><br>";
                 obj.appendChild(newDiv);
             }
         </script>

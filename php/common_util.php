@@ -101,6 +101,8 @@
 //            echo "<script>alert(" . $file_count . ");</script>";
             for ($i = 0; $i < $file_count; $i++) {
                 $file_size = $file['size'][$i];
+                // check input
+                if ($file_size == 0) continue;
                 $file_tmp = $file['tmp_name'][$i];
                 $file_ext = strtolower(end(explode('.',$file['name'][$i])));
                 $extensions= array("jpeg","jpg","png");
@@ -125,7 +127,6 @@
             } else {
                 print_r($errors);
             }
-        } else {
-            return null;
         }
+        return null;
     }
