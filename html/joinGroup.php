@@ -91,6 +91,30 @@ $groupArr = findNotJoinedGroup($username);
             }
             ?>
         </div>
+        <br>
+        <?php $joinedGroups = getUserGroup($username)?>
+        <div class="lead" style="font-style: oblique">
+            <?php
+            if(empty($joinedGroups)) {
+                echo "0 group joined ";
+            } else {
+                $size = count($joinedGroups);
+                echo $size." groups joined";
+            }
+            ?>
+        </div>
+        <hr>
+        <div class="row">
+            <?php
+            foreach ($joinedGroups as $g) {
+                $pageContent = "<div class='col-lg-4'><h4 style='font-weight: bold'>";
+                $pageContent = $pageContent.$g['gname']."</h4>";
+                $pageContent = $pageContent."<p>Description: ".$g['description']."</p></div>";
+                echo $pageContent;
+            }
+            ?>
+        </div>
+
     </div>
     <div class="footer">
         <div>Copyright &copy; CookZilla TM. All Right Reserved.</div>

@@ -63,7 +63,7 @@ function getUserViewedRecipe($username) {
 function getUserGroup($username) {
     $conn = connectDb();
     $username = cleanInput($username, 32, $conn);
-    $sql = "SELECT g.gid, g.gname from Groups g, GroupMember gm WHERE g.gid = gm.gid AND gm.uname=?";
+    $sql = "SELECT g.gid, g.gname, g.description from Groups g, GroupMember gm WHERE g.gid = gm.gid AND gm.uname=?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('s', $username);
     $stmt->execute();
