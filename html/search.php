@@ -71,8 +71,24 @@ $result = getRecipeByKeywordTags($keyword, $tags);
         </form>
     </div>
     <div class="container">
+        <div class="lead">
+            <?php
+                if(empty($result)) {
+                    echo "no result found";
+                } else {
+                    $size = count($result);
+                    echo $size." results found";
+                }
+            ?>
+        </div>
         <div class="row">
+            <?php
+                foreach ($result as $recipe) {
+                }
+            ?>
+            <div class="col-lg-4">
 
+            </div>
         </div>
     </div>
     <div class="footer">
