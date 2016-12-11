@@ -1,9 +1,8 @@
 <?php
 require '../php/db_query.php';
 session_start();
-$keyword = $_POST['search'];
-$tags = $_POST['selectedTag'];
-$result = getRecipeByKeywordTags($keyword, $tags);
+$rid = $_GET['id'];
+$basicInfo = getRecipeInfoById($rid);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,6 +12,7 @@ $result = getRecipeByKeywordTags($keyword, $tags);
     <link rel="stylesheet" href="../css/common.css" type="text/css"/>
     <link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css"/>
     <link rel="stylesheet" href="../css/home.css" type="text/css"/>
+    <link rel="stylesheet" href="../css/recipe.css" type="text/css"/>
     <script src="../js/jquery-3.1.1.min.js"></script>
     <script>
         $(document).ready(function () {
@@ -71,30 +71,12 @@ $result = getRecipeByKeywordTags($keyword, $tags);
         </form>
     </div>
     <div class="container">
-        <div class="lead" style="font-style: oblique">
-            <?php
-                if(empty($result)) {
-                    echo "no result found";
-                } else {
-                    $size = count($result);
-                    echo $size." results found";
-                }
-            ?>
+        <div class="blog-header">
+            <h1 class="blog-title" style="font-weight: bold"><?php echo $basicInfo[0]['rtitle'] ?></h1>
+            <p class="lead blog-description"></p>
         </div>
-        <hr>
-        <div class="row">
-            <?php
-                foreach ($result as $recipe) {
-                    $pageContent = "<div class='col-lg-4'><h4>";
-                    $pageContent = $pageContent.$recipe['rtitle']."</h4>";
-                    $imgDir = explode(';', $recipe['rimage'])[0];
-                    $pageContent = $pageContent."<p><img src='".$imgDir."' class='recipeImg' onerror=\"this.src='../img/default.jpg'\"/>";
-                    $pageContent = $pageContent."<p>Created by: ".$recipe['uname']."</p>";
-                    $pageContent = $pageContent."<p><a class='btn btn-default' href='recipe.php?id=".$recipe['rid']."'role='button'>View details »</a></p></div>";
-                    echo $pageContent;
-                }
-            ?>
-        </div>
+        <h2 style="font-weight: bold"></h2>
+
     </div>
     <div class="footer">
         <div>Copyright &copy; CookZilla TM. All Right Reserved.</div>

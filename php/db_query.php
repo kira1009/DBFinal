@@ -167,7 +167,6 @@ function getRecipeByKeywordTags($keyword, $tags) {
         }
     }
 
-
     foreach ($tagRes as $tmpElement) {
         $rid = $tmpElement['rid'];
         if(in_array($rid, $record)){
@@ -213,7 +212,6 @@ function getRecipeByTags($tags) {
  * @return array
  */
 function getRecipeByKeyword($keyword) {
-
     $keyArr = explode(" ", $keyword);
     $conn = connectDb();
     $resultArr = [];
@@ -253,5 +251,102 @@ function getMaxRRid() {
     $res = mysqli_query($conn, "SELECT MAX(rrid) AS rrid FROM RecipeReview");
     $conn->close();
     $result = $res->fetch_all(MYSQLI_ASSOC);
+    return $result;
+}
+
+/**
+ * get the detail of a recipe by its id which includes
+ * the recipe's title, description, creator, serving info, images, ingredients, reviews
+ * maybe not useful
+ * 0-basic info
+ * 1-ingredients
+ * 2-tags
+ * 3-review
+ * @param $rid
+ * @return mixed
+ */
+function getRecipeDetailById($rid) {
+    $conn = connectDb();
+    $conn->close();
+    $recipeInfo = getRecipeInfoById($rid);
+    $ingredientInfo = getRecipeIngredientById($rid);
+    $recipeReview = getRecipeReviewById($rid);
+    $recipeTag = getRecipeTagById($rid);
+    $result[0] = $recipeInfo;
+    $result[1] = $ingredientInfo;
+    $result[2] = $recipeTag;
+    $result[3] = $recipeReview;
+    return $result;
+}
+
+/**
+ * get recipe's creator name, titile, number of serving, description, images and created time.
+ * @param $rid
+ * @return mixed
+ */
+function getRecipeInfoById($rid) {
+    $conn = connectDb();
+    $rid = cleanInput($rid, 10, $conn);
+    $sql = "SELECT uname, rtitle, serving, rtext, rimage, timestamp FROM Recipe WHERE rid=?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('s', $rid);
+    $stmt->execute();
+    $res = $stmt->get_result();
+    $result = $res->fetch_all(MYSQLI_ASSOC);
+    $conn->close();
+    return $result;
+}
+
+/**
+ * get the ingredients to make this recipe
+ * @param $rid
+ * @return mixed
+ */
+function getRecipeIngredientById($rid) {
+    $conn = connectDb();
+    $rid = cleanInput($rid, 10, $conn);
+    $sql = "SELECT amount, unit, iname FROM RecipeIngredient WHERE rid=?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('s', $rid);
+    $stmt->execute();
+    $res = $stmt->get_result();
+    $result = $res->fetch_all(MYSQLI_ASSOC);
+    $conn->close();
+    return $result;
+}
+
+/**
+ * get the recipe's tags
+ * @param $rid
+ * @return mixed
+ */
+function getRecipeTagById($rid) {
+    $conn = connectDb();
+    $rid = cleanInput($rid, 10, $conn);
+    $sql = "SELECT tname FROM RecipeTag WHERE rid=?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('s', $rid);
+    $stmt->execute();
+    $res = $stmt->get_result();
+    $result = $res->fetch_all(MYSQLI_ASSOC);
+    $conn->close();
+    return $result;
+}
+
+/**
+ * get recipe's comment
+ * @param $rid
+ * @return mixed
+ */
+function getRecipeReviewById($rid) {
+    $conn = connectDb();
+    $rid = cleanInput($rid, 10, $conn);
+    $sql = "SELECT uname, rrtime, rrtitle, rrtext, suggestion, rrimage, rating FROM RecipeReview WHERE rid=? ORDER BY rrtime";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('s', $rid);
+    $stmt->execute();
+    $res = $stmt->get_result();
+    $result = $res->fetch_all(MYSQLI_ASSOC);
+    $conn->close();
     return $result;
 }

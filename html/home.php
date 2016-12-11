@@ -95,7 +95,7 @@ session_start();
                                 $pageContent = $pageContent.$recipe['rtitle']."</h4>";
                                 $imgDir = explode(';', $recipe['rimage'])[0];
                                 $pageContent = $pageContent."<p><img src='".$imgDir."' class='recipeImg' onerror=\"this.src='../img/default.jpg'\"/>";
-                                $pageContent = $pageContent."<p><a class='btn btn-default' href='recipe.php#id=".$recipe['rid']."'role='button'>View details »</a></p></div>";
+                                $pageContent = $pageContent."<p><a class='btn btn-default' href='recipe.php?id=".$recipe['rid']."'role='button'>View details »</a></p></div>";
                                 echo $pageContent;
                             }
                         ?>
@@ -137,7 +137,7 @@ session_start();
                                     echo "<br>";
                                 }
                             ?>
-                            <div style="width: inherit"><a href="join.php">join other groups</a></div>
+                            <div style="width: inherit"><a href="join.php">join group</a></div>
                         </div>
                         <div class="list-group-item">
                             <div class="rightColTitle"><h4>Events</h4></div>
@@ -148,7 +148,7 @@ session_start();
                                 }
                                 $nonRsvpEvents = getUserGroupButNoRsvpEvent($username);
                                 foreach ($nonRsvpEvents as $event) {
-                                    echo "<div style='width: 100%; color: grey;'>".$event['etitle']."<a href='../php/reserveEvent.php#id=".$event['eid']."' class='eventStat'>rsvp now</a></div>";
+                                    echo "<div style='width: 100%; color: grey;'>".$event['etitle']."<a href='../php/reserveEvent.php?id=".$event['eid']."' class='eventStat'>rsvp now</a></div>";
                                 }
                             ?>
                         </div>
