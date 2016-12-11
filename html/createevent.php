@@ -2,11 +2,12 @@
 /**
  * Created by PhpStorm.
  * User: Vincent
- * Date: 12/8/16
- * Time: 2:01 PM
+ * Date: 12/11/16
+ * Time: 11:01 AM
  */
 session_start();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,6 +55,9 @@ session_start();
                     <?php
                     require '../php/db_query.php';
                     $count = 1;
+                    if (hasAGroup($_SESSION['username']) == false) {
+                        echo "<script>alert('You must join a group to create event!')</script>";
+                    }
                     foreach (getTags() as $element) {
                         echo "<div id='tagOption".$count."' style='width: 30%'><input type='checkbox' name=selectedTag[] value=".$element['tname']." style='width: 20px; float:left;'/><label>".$element['tname']."</label></div>";
                         $count = $count + 1;
@@ -73,78 +77,45 @@ session_start();
             </div>
         </div>
     </div>
-
     <div>
-        <form id="create_recipe" action="../php/checkrecipe.php" method="post" style="width: 60%; margin-left: 20%" enctype="multipart/form-data">
+        <form id="create_event" action="../php/checkevent.php" method="post" style="width: 60%; margin-left: 20%" enctype="multipart/form-data">
             <div class="form-group">
-                <p style="text-align: center; font-size: medium; font-weight: bold;">Title</p>
-                <input type="text" class="form-control" name="title" id="recipe_title" maxlength="255" placeholder="Enter your recipe title">
-                <small class="form-text text-muted">You must enter your recipe title.</small>
+                <p style="text-align: center; font-size: medium; font-weight: bold;">Event Title</p>
+                <input type="text" class="form-control" name="etitle" maxlength="255" placeholder="Enter your event title">
+                <small class="form-text text-muted">You must enter your event title.</small>
             </div>
             <div class="form-group">
-                <p style="text-align: center; font-size: medium; font-weight: bold;">Serving</p>
-                <input type="number" min="0" step="1" class="form-control" name="serving" placeholder="Enter your serving">
-            </div>
-            <br><br><br>
-            <div class="form-group">
-                <p style="text-align: center; font-size: medium; font-weight: bold;">Tags</p>
+                <p style="text-align: center; font-size: medium; font-weight: bold;">Choose your group</p>
                 <?php
-                    $tags = getTags();
-                    foreach ($tags as $tag) {
-                        echo "<input type='checkbox' name='tags[]' value='" . $tag['tname'] . "'>" . $tag['tname'] . "<br>";
+                    $groups = getUserGroup($_SESSION['username']);
+                    echo "<select name='gid' style='margin-left: 43%'>";
+                    for($i = 0; $i < count($groups); $i++ ) {
+                        echo "<option value='" . $groups[$i]['gid'] ."'>" . $groups[$i]['gname'] . "</option>";
                     }
+                echo "</select><br>";
                 ?>
             </div>
-            <div>
-                <p style="text-align: center; font-size: medium; font-weight: bold;">Ingredient</p>
-            </div>
-            <div class="form-inline" id="ingredient" style="margin-left: 10%;"></div>
-            <div align="center">
-                <br>
-                <input type="button" value="Add More Ingredients!" onclick="addIngredient()">
-            </div>
-            <br><br><br>
+
             <div class="form-group">
-                <p style="text-align: center; font-size: medium; font-weight: bold;">Steps:</p>
-                <textarea class="form-control" name="step" rows="10"></textarea>
+                <p style="text-align: center; font-size: medium; font-weight: bold;">Event Description</p>
+                <textarea class="form-control" name="edesc" rows="10" maxlength="2000" placeholder="Enter your event description"></textarea>
             </div>
-            <br><br><br>
-            <p style="text-align: center; font-size: medium; font-weight: bold;">Images:</p>
-            <div id="recipeImg" style="margin-left: 20%;"></div>
-            <div align="center">
-                <br>
-                <input type="button" value="Add More Images!" onclick="addImg()">
+
+            <div class="form-group">
+                <p style="text-align: center; font-size: medium; font-weight: bold;">Event Location</p>
+                <input type="text" class="form-control" name="elocation" maxlength="255" placeholder="Enter your event location">
+                <small class="form-text text-muted">You must enter your event location.</small>
             </div>
-            <br><br><br>
+
+            <div class="form-group">
+                <p style="text-align: center; font-size: medium; font-weight: bold;">Event Date Time</p>
+                <input type="datetime-local" name="etime" style="margin-left: 36%">
+            </div>
+
             <div align="center">
-                <button type="submit" class="btn btn-primary">Submit your recipe!</button>
+                <button type="submit" class="btn btn-primary">Submit your Event!</button>
             </div>
         </form>
-        <script>
-            function addIngredient() {
-                var obj = document.getElementById("ingredient");
-                var newDiv = document.createElement("div");
-                newDiv.innerHTML = "<label>Amount</label>" +
-                    "<input type='number' min='0' name='amount[]'>" +
-                    "<label>Unit</label>" +
-                    "<select name='unit[]'>" +
-                    "<option value='gram'>gram</option>" +
-                    "<option value='ml'>ml</option>" +
-                    "<option value='l'>l</option>" +
-                    "<option value='item'>item</option>" +
-                    "</select>" +
-                    "<label>Name</label>" +
-                    "<input type='text' class='form-control' name='iname[]'><br>";
-                obj.appendChild(newDiv);
-            }
-
-            function addImg() {
-                var obj = document.getElementById("recipeImg");
-                var newDiv = document.createElement("div");
-                newDiv.innerHTML = "<input type='file' name='image[]'><br>";
-                obj.appendChild(newDiv);
-            }
-        </script>
     </div>
 
     <div class="footer">
@@ -153,3 +124,4 @@ session_start();
         <div>EMAIL: CookZilla@gmail.com</div>
     </div>
 </body>
+
