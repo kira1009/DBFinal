@@ -231,5 +231,27 @@ function getRecipeByKeyword($keyword) {
     $conn->close();
     return $resultArr;
 }
-//$tags=['Soup'];
-//var_dump(getRecipeByKeywordTags('chicken', $tags));
+
+function getMaxRid() {
+    $conn = connectDb();
+    $res = mysqli_query($conn, "SELECT MAX(rid) AS rid FROM Recipe");
+    $conn->close();
+    $result = $res->fetch_all(MYSQLI_ASSOC);
+    return $result;
+}
+
+function getMaxEid() {
+    $conn = connectDb();
+    $res = mysqli_query($conn, "SELECT MAX(eid) AS eid FROM Events");
+    $conn->close();
+    $result = $res->fetch_all(MYSQLI_ASSOC);
+    return $result;
+}
+
+function getMaxRRid() {
+    $conn = connectDb();
+    $res = mysqli_query($conn, "SELECT MAX(rrid) AS rrid FROM RecipeReview");
+    $conn->close();
+    $result = $res->fetch_all(MYSQLI_ASSOC);
+    return $result;
+}
