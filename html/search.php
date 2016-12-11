@@ -35,7 +35,7 @@ $result = getRecipeByKeywordTags($keyword, $tags);
         <form method="post" action="search.php" enctype="multipart/form-data">
             <div class="search">
                 <div>
-                    <input id="searchText" name="search" type="text" placeholder="Find a recipe" style="color: grey;">
+                    <input id="searchText" name="search" type="text" placeholder="Find a recipe" style="color: grey;" value="<?php echo $keyword?>">
                 </div>
                 <div id="tag" style="cursor:pointer;">
                     Tag<span class="caret"></span>
@@ -71,7 +71,7 @@ $result = getRecipeByKeywordTags($keyword, $tags);
         </form>
     </div>
     <div class="container">
-        <div class="lead">
+        <div class="lead" style="font-style: oblique">
             <?php
                 if(empty($result)) {
                     echo "no result found";
@@ -81,14 +81,19 @@ $result = getRecipeByKeywordTags($keyword, $tags);
                 }
             ?>
         </div>
+        <hr>
         <div class="row">
             <?php
                 foreach ($result as $recipe) {
+                    $pageContent = "<div class='col-lg-4'><h4>";
+                    $pageContent = $pageContent.$recipe['rtitle']."</h4>";
+                    $imgDir = explode(';', $recipe['rimage'])[0];
+                    $pageContent = $pageContent."<p><img src='".$imgDir."' class='recipeImg' onerror=\"this.src='../img/default.jpg'\"/>";
+                    $pageContent = $pageContent."<p>Created by: ".$recipe['uname']."</p>";
+                    $pageContent = $pageContent."<p><a class='btn btn-default' href='recipe.php#id=".$recipe['rid']."'role='button'>View details »</a></p></div>";
+                    echo $pageContent;
                 }
             ?>
-            <div class="col-lg-4">
-
-            </div>
         </div>
     </div>
     <div class="footer">
