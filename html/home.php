@@ -134,6 +134,7 @@ session_start();
                                         $memberName = $member['uname'];
                                         echo "<div style='width: 100%;'>".$memberName."</div>";
                                     }
+                                    echo "<div style='width: 100%;'><a href='../php/group_leave.php?id=".$group['gid']."'>Leave this group</a></div>";
                                     echo "<br>";
                                 }
                             ?>

@@ -109,7 +109,8 @@ $groupArr = findNotJoinedGroup($username);
             foreach ($joinedGroups as $g) {
                 $pageContent = "<div class='col-lg-4'><h4 style='font-weight: bold'>";
                 $pageContent = $pageContent.$g['gname']."</h4>";
-                $pageContent = $pageContent."<p>Description: ".$g['description']."</p></div>";
+                $pageContent = $pageContent."<p>Description: ".$g['description']."</p>";
+                $pageContent = $pageContent."<p><a class='btn btn-default' href='../php/group_leave.php?id=".$g['gid']."'role='button'>Leave</a></p></div>";
                 echo $pageContent;
             }
             ?>
