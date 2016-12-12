@@ -144,11 +144,11 @@ session_start();
                             <?php
                                 $rsvpEvents = getRsvpEvent($username);
                                 foreach ($rsvpEvents as $event) {
-                                    echo "<div style='width: 100%;'>".$event['etitle']."<div class='eventStat'>rsvped</div></div>";
+                                    echo "<div style='width: 100%;'><a href='event.php?eid=".$event['eid']."'>".$event['etitle']."</a><div class='eventStat'>rsvped</div></div>";
                                 }
                                 $nonRsvpEvents = getUserGroupButNoRsvpEvent($username);
                                 foreach ($nonRsvpEvents as $event) {
-                                    echo "<div style='width: 100%; color: grey;'>".$event['etitle']."<a href='../php/reserve_event.php?id=".$event['eid']."' class='eventStat'>rsvp now</a></div>";
+                                    echo "<div style='width: 100%; color: grey;'><a href='event.php?eid=".$event['eid']."'>".$event['etitle']."<a href='../php/reserve_event.php?id=".$event['eid']."' class='eventStat'>rsvp now</a></div>";
                                 }
                             ?>
                         </div>
