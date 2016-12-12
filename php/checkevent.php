@@ -15,7 +15,6 @@ date_default_timezone_set('America/New_York');
 $connection = connectDb();
 $response = array();
 $response[0] = true;
-//$response[1] = 'Hi';
 $thisEid = getMaxEid()[0]['eid'] + 1;
 $gid = $_POST['gid'];
 $etitle = cleanInput($_POST['etitle'], 255, $connection);

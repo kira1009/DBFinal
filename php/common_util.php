@@ -78,7 +78,7 @@
                     $count = $maxRid + 1;
                 }
             } else if ($path == '../img/eventImg/') {
-                $maxEid = getMaxEid()[0]['eid'];
+                $maxEid = getMaxErid()[0]['erid'];
                 if ($maxEid == NULL) {
                     $count = 0;
                 } else {

@@ -72,7 +72,6 @@ function getUserGroup($username) {
     $conn->close();
     return $result;
 }
-
 /**
  * get user rsvped events
  * @param $usrname
@@ -262,6 +261,14 @@ function getMaxGid() {
     return $result;
 }
 
+function getMaxErid() {
+    $conn = connectDb();
+    $res = mysqli_query($conn, "SELECT MAX(erid) AS erid FROM EventReport");
+    $conn->close();
+    $result = $res->fetch_all(MYSQLI_ASSOC);
+    return $result;
+}
+
 /**
  * get the detail of a recipe by its id which includes
  * the recipe's title, description, creator, serving info, images, ingredients, reviews
@@ -370,6 +377,86 @@ function findNotJoinedGroup($username) {
     $sql = "SELECT gid, gname, description FROM Groups WHERE gid NOT IN (SELECT gid FROM GroupMember WHERE uname=?)";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('s', $username);
+    $stmt->execute();
+    $res = $stmt->get_result();
+    $result = $res->fetch_all(MYSQLI_ASSOC);
+    $conn->close();
+    return $result;
+}
+
+/**
+ * check if user is in this group
+ * @param $username
+ * @param $gid
+ * @return true or false
+ */
+function isMember($gid, $username) {
+    $conn = connectDb();
+    $username = cleanInput($username, 32, $conn);
+    $sql = "SELECT count(*) as count FROM GroupMember WHERE  gid = ? and uname = ? ";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('is', $gid, $username);
+    $stmt->execute();
+    $res = $stmt->get_result();
+    $result = $res->fetch_all(MYSQLI_ASSOC);
+    $conn->close();
+    $groupCount = $result[0]['count'];
+    if($groupCount == 1) {
+        return true;
+    }
+    return false;
+}
+
+/**
+ * check if user RSVP this event
+ * @param $eid
+ * @param $username
+ * @return true or false
+ */
+function isRSVP($eid, $username) {
+    $conn = connectDb();
+    $username = cleanInput($username, 32, $conn);
+    $sql = "SELECT count(*) as count FROM EventRSVP WHERE  eid = ? and uname = ? ";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('is', $eid, $username);
+    $stmt->execute();
+    $res = $stmt->get_result();
+    $result = $res->fetch_all(MYSQLI_ASSOC);
+    $conn->close();
+    $groupCount = $result[0]['count'];
+    if($groupCount == 1) {
+        return true;
+    }
+    return false;
+}
+
+/**
+ * get info of a event
+ * @param $eid
+ * @return array of event
+ */
+function getEventInfoByEid($eid) {
+    $conn = connectDb();
+    $sql = "SELECT * FROM Events WHERE eid = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('i', $eid);
+    $stmt->execute();
+    $res = $stmt->get_result();
+    $result = $res->fetch_all(MYSQLI_ASSOC);
+    $conn->close();
+    return $result;
+}
+
+/**
+ * get all reports for this event
+ * @param $eid
+ * @return array of results
+ */
+function getReportInfoByEid($eid) {
+    $conn = connectDb();
+    $sql = "SELECT * FROM EventReport WHERE eid = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('i', $eid);
     $stmt->execute();
     $res = $stmt->get_result();
     $result = $res->fetch_all(MYSQLI_ASSOC);
