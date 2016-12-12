@@ -138,14 +138,14 @@ session_start();
                                     echo "<br>";
                                 }
                             ?>
-                            <div style="width: inherit"><a href="joinGroup.php">join group</a></div>
+                            <div style="width: inherit"><a href="joinGroup.php">+join group</a></div>
                         </div>
                         <div class="list-group-item">
                             <div class="rightColTitle"><h4>Events</h4></div>
                             <?php
                                 $rsvpEvents = getRsvpEvent($username);
                                 foreach ($rsvpEvents as $event) {
-                                    echo "<div style='width: 100%;'><a href='event.php?eid=".$event['eid']."'>".$event['etitle']."</a><div class='eventStat'>rsvped</div></div>";
+                                    echo "<div style='width: 100%;'><a href='event.php?eid=".$event['eid']."'>".$event['etitle']."</a><div class='eventStat'><a href='../php/cancel_event.php?id=".$event['eid']."'>cancel rsvp</a></div></div>";
                                 }
                                 $nonRsvpEvents = getUserGroupButNoRsvpEvent($username);
                                 foreach ($nonRsvpEvents as $event) {

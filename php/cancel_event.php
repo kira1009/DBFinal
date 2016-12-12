@@ -9,15 +9,15 @@ require 'db_connect.php';
 require 'common_util.php';
 
 session_start();
-$gId = $_GET['id'];
+$eventId = $_GET['id'];
 $username = $_SESSION['username'];
 $conn = connectDb();
 $username = cleanInput($username, 32, $conn);
-$gId = cleanInput($gId, 10, $conn);
-$sql = "DELETE FROM GroupMember WHERE gid=? AND uname=?";
+$eventId = cleanInput($eventId, 10, $conn);
+$sql = "DELETE FROM EventRSVP WHERE eid=? AND uname=?";
 $stmt = $conn->prepare($sql);
 $response = true;
-if(!$stmt->bind_param('ss', $gId, $username)) {
+if(!$stmt->bind_param('ss', $eventId, $username)) {
     $response = false;
     $stmt->close();
 }
