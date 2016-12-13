@@ -174,7 +174,7 @@ $basicInfo = getRecipeInfoById($rid);
                 <h3>Comment</h3>
                 <textarea autofocus="autofocus" maxlength="1000" minlength="1" name="comment" placeholder="Enter comment here" required class="textInput formText"></textarea>
                 <h3>Suggestion</h3>
-                <input autofocus="autofocus" maxlength="255" minlength="1" name="suggestion" placeholder="Enter improvement suggestion here" type="text" required class="textInput">
+                <input autofocus="autofocus" maxlength="255" name="suggestion" placeholder="Enter improve suggestion here" type="text" class="textInput">
                 <h3>Rating</h3>
                 <select name="rate">
                     <option value="1">1</option>

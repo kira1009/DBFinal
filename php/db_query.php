@@ -463,3 +463,5 @@ function getReportInfoByEid($eid) {
     $conn->close();
     return $result;
 }
+
+var_dump(getMaxRRid());
