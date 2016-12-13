@@ -67,6 +67,14 @@
         }
         return null;
     }
+
+    /**
+     *
+     * @param $file file array FILE[]
+     * @param $path
+     * @param $connection
+     * @return null|string
+     */
     function uploadImg($file, $path, $connection) {
         if (empty($file) == false) {
             $errors= array();

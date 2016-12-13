@@ -27,7 +27,6 @@ $isRSVP = isRSVP($eid, $username);
     <link rel="stylesheet" href="../css/common.css" type="text/css"/>
     <link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css"/>
     <link rel="stylesheet" href="../css/home.css" type="text/css"/>
-    <link rel="stylesheet" href="../css/recipe.css" type="text/css"/>
     <script src="../js/jquery-3.1.1.min.js"></script>
     <script>
         $(document).ready(function () {

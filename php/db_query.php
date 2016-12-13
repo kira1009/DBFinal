@@ -276,7 +276,7 @@ function getMaxErid() {
  * 0-basic info
  * 1-ingredients
  * 2-tags
- * 3-review
+ * 3-reviewImg
  * @param $rid
  * @return mixed
  */

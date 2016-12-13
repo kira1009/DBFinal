@@ -12,7 +12,7 @@ $basicInfo = getRecipeInfoById($rid);
     <link rel="stylesheet" href="../css/common.css" type="text/css"/>
     <link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css"/>
     <link rel="stylesheet" href="../css/home.css" type="text/css"/>
-    <link rel="stylesheet" href="../css/recipe.css" type="text/css"/>
+    <link rel="stylesheet" href="../css/recipe_refractor.css" type="text/css"/>
     <link rel="stylesheet" href="../css/nivo-slider.css" type="text/css"/>
     <link rel="stylesheet" href="../css/default.css" type="text/css"/>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js" type="text/javascript"></script>
@@ -104,12 +104,17 @@ $basicInfo = getRecipeInfoById($rid);
                 <br>
                 <?php
                     $ingredients = getRecipeIngredientById($rid);
-                    foreach ($ingredients as $ingredient) {
-                        $amount = $ingredient['amount'];
-                        $unit = $ingredient['unit'];
-                        $name = $ingredient['iname'];
-                        echo "<p>".$amount." ".$unit." of ".$name."</p>";
+                    if(empty($ingredient)){
+                        echo "<p>no ingredient posted</p>";
+                    }else{
+                        foreach ($ingredients as $ingredient) {
+                            $amount = $ingredient['amount'];
+                            $unit = $ingredient['unit'];
+                            $name = $ingredient['iname'];
+                            echo "<p>".$amount." ".$unit." of ".$name."</p>";
+                        }
                     }
+
                 ?>
             </div>
             <div id="slider" class="nivoSlider">
@@ -117,6 +122,9 @@ $basicInfo = getRecipeInfoById($rid);
                     $images = $basicInfo[0]['rimage'];
                     $imgDirs = explode(';', $images);
                     foreach ($imgDirs as $imgDir) {
+                        if(empty($imgDir)){
+                            continue;
+                        }
                         echo "<img src='".$imgDir."' alt='no image' onerror=\"this.src='../img/default.jpg'\"/>";
                     }
                 ?>
@@ -129,16 +137,29 @@ $basicInfo = getRecipeInfoById($rid);
                 <?php echo $basicInfo[0]['rtext'];?>
             </p>
         </div>
-        <div class="review">
+        <div class="review container" style="padding-left: 0px">
             <h2>Reviews</h2>
             <hr>
             <?php
                 $reviews = getRecipeReviewById($rid);
                 if(empty($reviews)) {
-                    echo "<p>Currently no review, be the first one to comment on this</p>";
+                    echo "<p>Currently no review Image, be the first one to comment on this</p>";
                 }else {
                     foreach ($reviews as $review) {
-                        $htmlContent = "<div class='col-lg-4'><h4>".$review['rrtitle']."</h4>";
+                        $htmlContent = "<div class='col-lg-4'><h4>".$review['rrtitle']."</h4><hr style='margin-bottom:auto'>";
+                        $htmlContent = $htmlContent."<p style='color: grey;'>by ".$review['uname']."</p>";
+                        $reviewImg = explode(";", $review['rrimage'])[0];
+                        $htmlContent = $htmlContent."<p><img src='".$reviewImg."' class='recipeImg' onerror=\"this.src='../img/default.jpg'\"/>";
+                        $rating = $review['rating'];
+                        $rateImg = "../img/rate/".$rating.".png";
+                        $htmlContent = $htmlContent."<p><img src='".$rateImg."' class='recipeImg' style='width: 50%'/></p>";
+                        $htmlContent = $htmlContent."<p>Comment: ".$review['rrtext']."</p>";
+                        if(empty($review['suggestion'])){
+                            $htmlContent = $htmlContent."</div>";
+                        }else {
+                            $htmlContent = $htmlContent."<p>Suggestion: ".$review['suggestion']."</p></div>";
+                        }
+                        echo $htmlContent;
                     }
                 }
             ?>
@@ -147,7 +168,34 @@ $basicInfo = getRecipeInfoById($rid);
             <h2>Add your comment</h2>
             <hr>
             <form method="post" action="../php/submit_review.php" enctype="multipart/form-data">
-                <input autofocus="autofocus" maxlength="32" minlength="1" name="title" placeholder="Username" type="text" required class="formInput">
+                <h3>Title</h3>
+                <input autofocus="autofocus" maxlength="50" minlength="1" name="title" placeholder="Enter title here" type="text" required class="textInput">
+                <input type="hidden" value="<?php echo $rid;?>" name="rid">
+                <h3>Comment</h3>
+                <textarea autofocus="autofocus" maxlength="1000" minlength="1" name="comment" placeholder="Enter comment here" required class="textInput formText"></textarea>
+                <h3>Suggestion</h3>
+                <input autofocus="autofocus" maxlength="255" minlength="1" name="suggestion" placeholder="Enter improvement suggestion here" type="text" required class="textInput">
+                <h3>Rating</h3>
+                <select name="rate">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+                <br>
+                <div id="reviewImg">
+                </div>
+                <div onclick="addImg()" class="btn btn-primary">Add Picture</div>
+                <button type="submit" class="btn btn-primary" value="Submit">Submit</button>
+                <script>
+                    function addImg() {
+                        var obj = document.getElementById("reviewImg");
+                        var newDiv = document.createElement("div");
+                        newDiv.innerHTML = "<a href='javascript:' class='a-upload'><input type='file' name='image[]' >Upload Image</a>";
+                        obj.appendChild(newDiv);
+                    }
+                </script>
             </form>
         </div>
     </div>
