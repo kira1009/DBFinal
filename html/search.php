@@ -1,9 +1,12 @@
 <?php
 require '../php/db_query.php';
+date_default_timezone_set('America/New_York');
 session_start();
 $keyword = $_POST['search'];
 $tags = $_POST['selectedTag'];
+$username = $_SESSION['username'];
 $result = getRecipeByKeywordTags($keyword, $tags);
+record_usr_behavior(1, $keyword, date('Y-m-d H:i:s'),$username);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,7 +26,6 @@ $result = getRecipeByKeywordTags($keyword, $tags);
 <body>
 <div class="body">
     <?php
-    $username = $_SESSION['username'];
     if($username == null) {
         echo "<script>window.location.href = './login.php';</script>";
     }

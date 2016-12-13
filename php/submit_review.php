@@ -5,8 +5,7 @@
  * Date: 12/12/16
  * Time: 7:02 PM
  */
-require 'db_connect.php';
-require 'common_util.php';
+require 'db_query.php';
 
 session_start();
 date_default_timezone_set('America/New_York');
@@ -17,6 +16,7 @@ $comment = cleanInput($_POST['comment'], 1000, $conn);
 $suggestion = cleanInput($_POST['suggestion'], 255, $conn);
 $rate = cleanInput($_POST['rate'], 1, $conn);
 $username = cleanInput($_SESSION['username'], 32, $conn);
+
 
 $result = submit_review($conn, $recipeId, $reviewTitle, $comment, $suggestion, $rate, $username);
 if($result) {
@@ -60,5 +60,6 @@ function submit_review($conn, $recipeId, $reviewTitle, $comment, $suggestion, $r
         return false;
     }
     $stmt->close();
+    $conn->close();
     return true;
 }

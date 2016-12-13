@@ -1,8 +1,14 @@
 <?php
 require '../php/db_query.php';
+date_default_timezone_set('America/New_York');
 session_start();
 $rid = $_GET['id'];
 $basicInfo = getRecipeInfoById($rid);
+$username = $_SESSION['username'];
+$url = $_SERVER['HTTP_REFERER'];
+if(strpos($url, "search.php") || strpos($url, "home.php")) {
+    record_usr_behavior(0, $rid, date('Y-m-d H:i:s'),$username);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,7 +37,6 @@ $basicInfo = getRecipeInfoById($rid);
 <body>
 <div class="body">
     <?php
-    $username = $_SESSION['username'];
     if($username == null) {
         echo "<script>window.location.href = './login.php';</script>";
     }
@@ -153,11 +158,11 @@ $basicInfo = getRecipeInfoById($rid);
                         $rating = $review['rating'];
                         $rateImg = "../img/rate/".$rating.".png";
                         $htmlContent = $htmlContent."<p><img src='".$rateImg."' class='recipeImg' style='width: 50%'/></p>";
-                        $htmlContent = $htmlContent."<p>Comment: ".$review['rrtext']."</p>";
+                        $htmlContent = $htmlContent."<p>Comment: ".str_replace("\\r\\n", "</br>", $review['rrtext'])."</p>";
                         if(empty($review['suggestion'])){
                             $htmlContent = $htmlContent."</div>";
                         }else {
-                            $htmlContent = $htmlContent."<p>Suggestion: ".$review['suggestion']."</p></div>";
+                            $htmlContent = $htmlContent."<p>Suggestion: ".str_replace("\r\n", "</br>", $review['suggestion'])."</p></div>";
                         }
                         echo $htmlContent;
                     }

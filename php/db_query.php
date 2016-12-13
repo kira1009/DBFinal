@@ -464,4 +464,19 @@ function getReportInfoByEid($eid) {
     return $result;
 }
 
-var_dump(getMaxRRid());
+/**
+ * record user activities
+ * @param $type
+ * @param $content
+ * @param $time
+ * @param $username
+ */
+function record_usr_behavior($type, $content, $time, $username){
+    $conn = connectDb();
+    $sql = "INSERT INTO Userlogs(uname, type, content, time) VALUES (?, ?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('ssss', $username, $type, $content, $time);
+    $stmt->execute();
+    $conn->close();
+    return true;
+}
