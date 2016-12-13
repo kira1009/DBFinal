@@ -186,8 +186,8 @@ $basicInfo = getRecipeInfoById($rid);
                 <br>
                 <div id="reviewImg">
                 </div>
-                <div onclick="addImg()" class="btn btn-primary">Add Picture</div>
-                <button type="submit" class="btn btn-primary" value="Submit">Submit</button>
+                <div onclick="addImg()" class="btn btn-primary" style="margin-top:10px;">Add Picture</div>
+                <button type="submit" class="btn btn-primary" value="Submit" style="margin-top:10px;">Submit</button>
                 <script>
                     function addImg() {
                         var obj = document.getElementById("reviewImg");
