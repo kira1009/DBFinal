@@ -139,7 +139,9 @@ if(strpos($url, "search.php") || strpos($url, "home.php")) {
             <h2>Description</h2>
             <hr>
             <p>
-                <?php echo $basicInfo[0]['rtext'];?>
+                <?php
+                echo str_replace("\\r\\n", "</br>", $basicInfo[0]['rtext']);
+                ?>
             </p>
         </div>
         <div class="review container" style="padding-left: 0px">
