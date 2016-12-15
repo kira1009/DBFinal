@@ -480,3 +480,37 @@ function record_usr_behavior($type, $content, $time, $username){
     $conn->close();
     return true;
 }
+
+/**
+ * get all related recipes
+ * @param $rid
+ * @return array of related rid
+ */
+function getRelatedRid($rid) {
+    $conn = connectDb();
+    $sql = "SELECT relateTo FROM RecipeRelation WHERE rid = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('i', $rid);
+    $stmt->execute();
+    $res = $stmt->get_result();
+    $result = $res->fetch_all(MYSQLI_ASSOC);
+    $conn->close();
+    return $result;
+}
+
+/**
+ * get all RSVPed user for an event
+ * @param $eid
+ * @return array of RSVPed users
+ */
+function getRSVPedUser($eid) {
+    $conn = connectDb();
+    $sql = "SELECT uname FROM EventRSVP WHERE eid = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('i', $eid);
+    $stmt->execute();
+    $res = $stmt->get_result();
+    $result = $res->fetch_all(MYSQLI_ASSOC);
+    $conn->close();
+    return $result;
+}

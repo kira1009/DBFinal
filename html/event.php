@@ -96,6 +96,17 @@ $isRSVP = isRSVP($eid, $username);
         <p><?= $eventInfo[0]['elocation']?></p>
         <h4>Event Date and Time</h4>
         <p><?= $eventInfo[0]['etime']?></p>
+        <h4>RSVP Users</h4>
+            <?php
+            $RSVPed = getRSVPedUser($eid);
+                if (count($RSVPed) == 0) {
+                    echo "<p>No RSVPed users yet!</p>";
+                } else {
+                    for ($i = 0; $i < count($RSVPed); $i++) {
+                        echo "<p>" . $RSVPed[$i]['uname'] . "</p>";
+                    }
+                }
+            ?>
         <hr>
     </div>
 
@@ -107,10 +118,13 @@ $isRSVP = isRSVP($eid, $username);
                 echo "<h4>User: " . $reports[$i]['uname'] . "</h4>";
                 echo "<h4>Report Time: " . $reports[$i]['ertime'] . "</h4>";
                 echo "<h4>Report Text: " . $reports[$i]['ertext'] . "</h4>";
+                if ($reports[$i]['erimage'] == null) {
+                    echo "<img src='../img/default.jpg' style='width:400px; height=400px'>";
+                }
                 $imgs = explode(";", $reports[$i]['erimage']);
                 foreach ($imgs as $img) {
                     if ($img == null) continue;
-                    echo "<img src='" . $img . "' style='width:304px;height:228px;'>";
+                    echo "<img src='" . $img . "' style='width:400px; height=400px'>";
                 }
                 echo "<hr>";
             }

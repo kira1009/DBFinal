@@ -16,6 +16,7 @@ session_start();
     <link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css"/>
     <link rel="stylesheet" href="../css/home.css" type="text/css"/>
     <script src="../js/jquery-3.1.1.min.js"></script>
+
     <script>
         $(document).ready(function () {
             $("#tags").hide();
@@ -114,6 +115,14 @@ session_start();
             <div align="center">
                 <br>
                 <input type="button" value="Add More Images!" onclick="addImg()">
+            </div>
+            <br><br><br>
+            <div id="recipeLink">
+                <input type="text" class="form-control" name="link1" placeholder="Enter your related recipe link">
+                <br>
+                <input type="text" class="form-control" name="link2" placeholder="Enter your related recipe link">
+                <br>
+                <input type="text" class="form-control" name="link3" placeholder="Enter your related recipe link">
             </div>
             <br><br><br>
             <div align="center">

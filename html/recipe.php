@@ -144,6 +144,19 @@ if(strpos($url, "search.php") || strpos($url, "home.php")) {
                 ?>
             </p>
         </div>
+        <div>
+            <h2>Related Recipes</h2>
+            <?php
+                $links = getRelatedRid($rid);
+                if (count($links) == 0) {
+                    echo "<p>No such related recipes!</p>";
+                } else {
+                    for ($i = 0; $i < count($links); $i++) {
+                        echo "<a href='recipe.php?id=" . $links[$i]['relateTo'] . "'>" . getRecipeInfoById($links[$i]['relateTo'])[0]['rtitle']."</a><br>";
+                    }
+                }
+            ?>
+        </div>
         <div class="review container" style="padding-left: 0px">
             <h2>Reviews</h2>
             <hr>

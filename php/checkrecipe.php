@@ -34,6 +34,7 @@ $rtext = cleanInput($_POST["step"], 2000, $connection);
 $iname = array();
 $amount = array();
 $unit = array();
+$links = array();
 $thisRid = getMaxRid()[0]['rid'] + 1;
 $rimage = uploadImg($_FILES['image'], '../img/recipeImg/', $connection);
 //check and store iname, amount and unit
@@ -78,6 +79,30 @@ if (is_array($_POST["unit"])) {
 if (count($iname) !== count(array_unique($iname))) {
     $response[0] = false;
     $response[1] = "Illegal Input! Ingredient name invalid!";
+}
+
+for ($it = 1; $it <= 3; $it++) {
+    $ind = 'link' . $it;
+    $i = cleanInput($_POST[$ind], 255, $connection);
+    if ($i != null) {
+        $link = explode("?", $i);
+//        echo "<script>alert('" . $link[0] ."');</script>";
+//        echo "<script>alert('" . $link[1] ."');</script>";
+        if ($link[0] == "localhost/DBFinal/html/recipe.php") {
+            $rid = explode("=", $link[1]);
+            if ($rid[0] == 'id' and $rid[1] <= getMaxRid()[0]['rid']) {
+//                echo "<script>alert('" . $rid[1] ."');</script>";
+                array_push($links, $rid[1]);
+            } else {
+                $response[0] = false;
+                $response[1] = "Illegal Input! Your related recipe link is invalid1!";
+            }
+        } else {
+            $response[0] = false;
+            $response[1] = "Illegal Input! Your related recipe link is invalid2!";
+        }
+
+    }
 }
 
 
@@ -171,6 +196,35 @@ if ($response[0] == true) {
         //$_SESSION['username'] = $username;
         $response[0] = true;
         $response[1] = "Successfully submit your recipe!";
+        //process return
+    }
+    echo "<script>alert('" . $links[0] ."');</script>";
+    echo "<script>alert('" . $links[1] ."');</script>";
+
+    // insert user's related recipe links into RecipeRelation table
+    for ($i = 0; $i < count($links); $i++) {
+        if (!($stmt = $connection->prepare("INSERT INTO RecipeRelation VALUES (?, ?)"))) {
+            $response[0] = false;
+            $response[1] = 'DB statement prepare error';
+            $stmt->close();
+            return $response;
+        }
+        if(!$stmt->bind_param('ii', $thisRid, $links[$i])) {
+            $response[0] = false;
+            $response[1] = 'DB parameter bind error';
+            $stmt->close();
+            return $response;
+        }
+        if(!$stmt->execute()) {
+            $response[0] = false;
+            $response[1] = 'DB statement execute error';
+            $stmt->close();
+            return $response;
+        }
+        $stmt->close();
+        $response[0] = true;
+        $response[1] = "Successfully submit your recipe!";
+
         //process return
     }
 }
