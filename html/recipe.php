@@ -109,7 +109,7 @@ if(strpos($url, "search.php") || strpos($url, "home.php")) {
                 <br>
                 <?php
                     $ingredients = getRecipeIngredientById($rid);
-                    if(empty($ingredient)){
+                    if(empty($ingredients)){
                         echo "<p>no ingredient posted</p>";
                     }else{
                         foreach ($ingredients as $ingredient) {
@@ -204,12 +204,12 @@ if(strpos($url, "search.php") || strpos($url, "home.php")) {
             <hr>
             <form method="post" action="../php/submit_review.php" enctype="multipart/form-data">
                 <h3>Title</h3>
-                <input autofocus="autofocus" maxlength="50" minlength="1" name="title" placeholder="Enter title here" type="text" required class="textInput">
+                <input maxlength="50" minlength="1" name="title" placeholder="Enter title here" type="text" required class="textInput">
                 <input type="hidden" value="<?php echo $rid;?>" name="rid">
                 <h3>Comment</h3>
-                <textarea autofocus="autofocus" maxlength="1000" minlength="1" name="comment" placeholder="Enter comment here" required class="textInput formText"></textarea>
+                <textarea maxlength="1000" minlength="1" name="comment" placeholder="Enter comment here" required class="textInput formText"></textarea>
                 <h3>Suggestion</h3>
-                <input autofocus="autofocus" maxlength="255" name="suggestion" placeholder="Enter improve suggestion here" type="text" class="textInput">
+                <input maxlength="255" name="suggestion" placeholder="Enter improve suggestion here" type="text" class="textInput">
                 <h3>Rating</h3>
                 <select name="rate">
                     <option value="1">1</option>
