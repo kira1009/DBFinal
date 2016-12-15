@@ -81,10 +81,10 @@ if($type == 'self'){
                 </div>
             </div>
             <div class="form-group">
-                <h4>Login Name: <?php echo $profile['uname']?></h4>
+                <h4>User Name: <?php echo $profile['uname']?></h4>
             </div>
             <div class="form-group" style="margin-bottom: 40px;">
-                <h4>Name: <?php echo $profile['realname']?></h4>
+                <h4>Real Name: <?php echo $profile['realname']?></h4>
             </div>
             <div class="form-group">
                 <h4>Profile</h4>

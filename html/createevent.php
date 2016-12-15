@@ -72,7 +72,7 @@ session_start();
                 </div>
             </form>
             <div id="username">
-                <a href="profile.php?id=self" style="text-decoration: none;" ><?php echo $username;?></a>
+                <a href="profile.php?id=self" style="text-decoration: none;" ><?php echo $_SESSION['username'];?></a>
                 <a href="logout.php" style="margin-left: 15px;text-decoration: none;">Sign Out</a>
             </div>
         </div>

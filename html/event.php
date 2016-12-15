@@ -59,7 +59,7 @@ $isRSVP = isRSVP($eid, $username);
                     </div>
                 </div>
                 <div id="username">
-                    <?php echo $username;?>
+                    <a href="profile.php?id=self" style="text-decoration: none;" ><?php echo $username;?></a>
                     <a href="logout.php"  style="margin-left: 10px;text-decoration: none;">Sign Out</a>
                 </div>
                 <script type="text/javascript">
