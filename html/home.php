@@ -42,7 +42,7 @@ session_start();
                     </div>
                 </div>
                 <div id="username">
-                    <?php echo $username;?>
+                    <a href="profile.php?id=self" style="text-decoration: none;" ><?php echo $username;?></a>
                     <a href="logout.php"  style="margin-left: 10px;text-decoration: none;">Sign Out</a>
                 </div>
                 <script type="text/javascript">
@@ -132,13 +132,13 @@ session_start();
                                     $members = getGroupUsersById($group['gid']);
                                     foreach ($members as $member) {
                                         $memberName = $member['uname'];
-                                        echo "<div style='width: 100%;'>".$memberName."</div>";
+                                        echo "<div style='width: 100%;'><a href='profile.php?id=".$memberName."'>".$memberName."</a></div>";
                                     }
-                                    echo "<div style='width: 100%;'><a href='../php/group_leave.php?id=".$group['gid']."'>Leave this group</a></div>";
+                                    echo "<div style='width: 100%;text-align: center'><a href='../php/group_leave.php?id=".$group['gid']."'>Leave this group</a></div>";
                                     echo "<br>";
                                 }
                             ?>
-                            <div style="width: inherit"><a href="joinGroup.php">+join group</a></div>
+                            <div style="width: inherit; text-align: center;"><a href="joinGroup.php">+join group</a></div>
                         </div>
                         <div class="list-group-item">
                             <div class="rightColTitle"><h4>Events</h4></div>

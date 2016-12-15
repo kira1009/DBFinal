@@ -514,3 +514,20 @@ function getRSVPedUser($eid) {
     $conn->close();
     return $result;
 }
+
+/**
+ * get user's profile by the username
+ * @param $uname
+ */
+function getUserProfile($name) {
+    $conn = connectDb();
+    $name = cleanInput($name, 32, $conn);
+    $sql = "SELECT uname, realname, uprofile, uicon From User WHERE uname=?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('s', $name);
+    $stmt->execute();
+    $res = $stmt->get_result();
+    $result = $res->fetch_all(MYSQLI_ASSOC);
+    $conn->close();
+    return $result[0];
+}
