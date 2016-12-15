@@ -88,9 +88,15 @@ session_start();
             </div>
 
             <div align="center">
-                <button type="submit" class="btn btn-primary">Submit to create your group!</button>
+                <button type="submit" class="btn btn-primary" style="margin-bottom: 10px">Submit to create your group!</button>
             </div>
         </form>
+    </div>
+
+    <div class="footer">
+        <div>Copyright &copy; CookZilla TM. All Right Reserved.</div>
+        <div>ADDRESS: 5 MetroTech, Brooklyn, 11201</div>
+        <div>EMAIL: CookZilla@gmail.com</div>
     </div>
 </body>
 </html>

@@ -126,7 +126,7 @@ session_start();
             </div>
             <br><br><br>
             <div align="center">
-                <button type="submit" class="btn btn-primary">Submit your recipe!</button>
+                <button type="submit" class="btn btn-primary" style="margin-bottom: 10px">Submit your recipe!</button>
             </div>
         </form>
         <script>

@@ -88,10 +88,9 @@ for ($it = 1; $it <= 3; $it++) {
         $link = explode("?", $i);
 //        echo "<script>alert('" . $link[0] ."');</script>";
 //        echo "<script>alert('" . $link[1] ."');</script>";
-        if ($link[0] == "localhost/DBFinal/html/recipe.php") {
+        if ($link[0] == "localhost/DBFinal/html/recipe.php" or $link[0] == "http://localhost/DBFinal/html/recipe.php") {
             $rid = explode("=", $link[1]);
-            if ($rid[0] == 'id' and $rid[1] <= getMaxRid()[0]['rid']) {
-//                echo "<script>alert('" . $rid[1] ."');</script>";
+            if ($rid[0] == 'id' and ctype_digit($rid[1]) and count(getRecipeInfoById($rid[1])) == 1) {
                 array_push($links, $rid[1]);
             } else {
                 $response[0] = false;
@@ -198,8 +197,6 @@ if ($response[0] == true) {
         $response[1] = "Successfully submit your recipe!";
         //process return
     }
-    echo "<script>alert('" . $links[0] ."');</script>";
-    echo "<script>alert('" . $links[1] ."');</script>";
 
     // insert user's related recipe links into RecipeRelation table
     for ($i = 0; $i < count($links); $i++) {
