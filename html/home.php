@@ -88,14 +88,14 @@ session_start();
                         <h3>Your recipes</h3>
                         <hr>
                         <?php
-                            $count = 0;
+//                            $count = 0;
                             $recipes = getUserRecipe($username);
                             if(empty($recipes)){
                                 echo "<p>no recipe now, <a href='createrecipe.php'>create one</a></p>";
                             }
                             foreach ($recipes as $recipe) {
-                                if($count > 2) break;
-                                $count++;
+//                                if($count > 2) break;
+//                                $count++;
                                 $pageContent = "<div class='col-xs-6 col-lg-4'><h4>";
                                 $pageContent = $pageContent.$recipe['rtitle']."</h4>";
                                 $imgDir = explode(';', $recipe['rimage'])[0];
@@ -120,7 +120,7 @@ session_start();
                                 $pageContent = "<div class='col-xs-6 col-lg-4'><h4>";
                                 $pageContent = $pageContent.$recipe['rtitle']."</h4>";
                                 $imgDir = explode(';', $recipe['rimage'])[0];
-                                $pageContent = $pageContent."<p><img src='".$imgDir."' onerror=\"this.src='../img/default.jpg'\"/>";
+                                $pageContent = $pageContent."<p><img class='recipeImg' src='".$imgDir."' onerror=\"this.src='../img/default.jpg'\"/>";
                                 $pageContent = $pageContent."<p><a class='btn btn-default' href='recipe.php?id=".$recipe['rid']."'role='button'>View details »</a></p></div>";
                                 echo $pageContent;
                             }

@@ -142,8 +142,8 @@ session_start();
                     "<option value='l'>l</option>" +
                     "<option value='item'>item</option>" +
                     "</select></div>" +
-                    "<label>Name: </label>" +
-                    "<input type='text' class='form-control' name='iname[]'><br>";
+                    "<div style='width: 33%; float: left'><label>Name: </label>" +
+                    "<input type='text' class='form-control' name='iname[]'></div><br><br>";
                 obj.appendChild(newDiv);
             }
 

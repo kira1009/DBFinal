@@ -46,7 +46,7 @@ function getUserRecipe($username) {
 function getUserViewedRecipe($username) {
     $conn = connectDb();
     $username = cleanInput($username, 32, $conn);
-    $sql = "SELECT rid, rtitle, rimage FROM Recipe r, Userlogs l WHERE l.uname=? AND l.type=0 AND l.content=r.rid AND l.uname != r.uname ORDER BY l.time";
+    $sql = "SELECT DISTINCT rid, rtitle, rimage FROM Recipe r, Userlogs l WHERE l.uname=? AND l.type=0 AND l.content=r.rid AND l.uname != r.uname ORDER BY l.time";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('s', $username);
     $stmt->execute();
