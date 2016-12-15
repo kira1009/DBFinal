@@ -488,7 +488,7 @@ function record_usr_behavior($type, $content, $time, $username){
  */
 function getRelatedRid($rid) {
     $conn = connectDb();
-    $sql = "SELECT relateTo FROM RecipeRelation WHERE rid = ?";
+    $sql = "SELECT r.rid, r.rtitle, r.uname, r.rimage FROM RecipeRelation rr, Recipe r WHERE rr.relateTo = r.rid AND rr.rid = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('i', $rid);
     $stmt->execute();

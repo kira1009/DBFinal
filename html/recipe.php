@@ -144,15 +144,25 @@ if(strpos($url, "search.php") || strpos($url, "home.php")) {
                 ?>
             </p>
         </div>
-        <div>
+        <div class="review container" style="padding-left: 0px">
             <h2>Related Recipes</h2>
+            <hr>
             <?php
-                $links = getRelatedRid($rid);
-                if (count($links) == 0) {
+                $relatedRecipes = getRelatedRid($rid);
+                if (count($relatedRecipes) == 0) {
                     echo "<p>No such related recipes!</p>";
                 } else {
-                    for ($i = 0; $i < count($links); $i++) {
-                        echo "<a href='recipe.php?id=" . $links[$i]['relateTo'] . "'>" . getRecipeInfoById($links[$i]['relateTo'])[0]['rtitle']."</a><br>";
+//                    for ($i = 0; $i < count($links); $i++) {
+//                        echo "<a href='recipe.php?id=" . $links[$i]['relateTo'] . "'>" . getRecipeInfoById($links[$i]['relateTo'])[0]['rtitle']."</a><br>";
+//                    }
+                    foreach ($relatedRecipes as $relatedRecipe) {
+                        $pageContent = "<div class='col-lg-4'><h4>";
+                        $pageContent = $pageContent.$relatedRecipe['rtitle']."</h4>";
+                        $imgDir = explode(';', $relatedRecipe['rimage'])[0];
+                        $pageContent = $pageContent."<p><img src='".$imgDir."' class='recipeImg' onerror=\"this.src='../img/default.jpg'\"/>";
+                        $pageContent = $pageContent."<p>Created by: ".$relatedRecipe['uname']."</p>";
+                        $pageContent = $pageContent."<p><a class='btn btn-default' href='recipe.php?id=".$relatedRecipe['rid']."'role='button'>View details »</a></p></div>";
+                        echo $pageContent;
                     }
                 }
             ?>
@@ -163,7 +173,7 @@ if(strpos($url, "search.php") || strpos($url, "home.php")) {
             <?php
                 $reviews = getRecipeReviewById($rid);
                 if(empty($reviews)) {
-                    echo "<p>Currently no review Image, be the first one to comment on this</p>";
+                    echo "<p>Currently no review, be the first one to comment on this</p>";
                 }else {
                     foreach ($reviews as $review) {
                         $htmlContent = "<div class='col-lg-4'><h4>".$review['rrtitle']."</h4><hr style='margin-bottom:auto'>";
