@@ -69,7 +69,7 @@ session_start();
                 </div>
             </form>
             <div id="username">
-                <?php echo $_SESSION['username'];?>
+                <a href="profile.php?id=self" style="text-decoration: none;" ><?php echo $_SESSION['username'];?></a>
                 <a href="logout.php" style="margin-left: 15px;text-decoration: none;">Sign Out</a>
             </div>
         </div>
@@ -92,7 +92,7 @@ session_start();
                 <?php
                     $tags = getTags();
                     foreach ($tags as $tag) {
-                        echo "<input type='checkbox' name='tags[]' value='" . $tag['tname'] . "'>" . $tag['tname'] . "<br>";
+                        echo "<div style='width: 33%; float: left'><input type='checkbox' name='tags[]' value='" . $tag['tname'] . "'>" . $tag['tname'] . "</div>";
                     }
                 ?>
             </div>
@@ -102,7 +102,7 @@ session_start();
             <div class="form-inline" id="ingredient" style="margin-left: 10%;"></div>
             <div align="center">
                 <br>
-                <input type="button" value="Add More Ingredients!" onclick="addIngredient()">
+                <input type="button" value="Add More Ingredients!" class="btn" onclick="addIngredient()">
             </div>
             <br><br><br>
             <div class="form-group">
@@ -114,7 +114,7 @@ session_start();
             <div id="recipeImg" style="margin-left: 20%;"></div>
             <div align="center">
                 <br>
-                <input type="button" value="Add More Images!" onclick="addImg()">
+                <input type="button" value="Add More Images!" class="btn" onclick="addImg()">
             </div>
             <br><br><br>
             <div id="recipeLink">
@@ -133,16 +133,16 @@ session_start();
             function addIngredient() {
                 var obj = document.getElementById("ingredient");
                 var newDiv = document.createElement("div");
-                newDiv.innerHTML = "<label>Amount</label>" +
-                    "<input type='number' min='0' name='amount[]'>" +
-                    "<label>Unit</label>" +
-                    "<select name='unit[]'>" +
+                newDiv.innerHTML = "<div style='width: 33%; float: left'><label>Amount: </label>" +
+                    "<input type='number' min='0' name='amount[]' class='form-control' ></div>" +
+                    "<div style='width: 33%; float: left'><label style='margin-left: 40px'>Unit: </label>" +
+                    "<select name='unit[]' class='form-control'>" +
                     "<option value='gram'>gram</option>" +
                     "<option value='ml'>ml</option>" +
                     "<option value='l'>l</option>" +
                     "<option value='item'>item</option>" +
-                    "</select>" +
-                    "<label>Name</label>" +
+                    "</select></div>" +
+                    "<label>Name: </label>" +
                     "<input type='text' class='form-control' name='iname[]'><br>";
                 obj.appendChild(newDiv);
             }
