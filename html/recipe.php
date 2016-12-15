@@ -84,8 +84,8 @@ if(strpos($url, "search.php") || strpos($url, "home.php")) {
         </form>
     </div>
     <div class="container">
-        <div class="blog-header">
-            <h1 class="blog-title" style="font-weight: bold"><?php echo $basicInfo[0]['rtitle'] ?></h1>
+        <div>
+            <h1 style="font-weight: bold"><?php echo $basicInfo[0]['rtitle'] ?></h1>
             <hr style="margin-bottom: auto">
             <p style="color: grey"><?php echo $basicInfo[0]['serving']." servings";?></p>
             <?php
@@ -125,13 +125,18 @@ if(strpos($url, "search.php") || strpos($url, "home.php")) {
             <div id="slider" class="nivoSlider">
                 <?php
                     $images = $basicInfo[0]['rimage'];
-                    $imgDirs = explode(';', $images);
-                    foreach ($imgDirs as $imgDir) {
-                        if(empty($imgDir)){
-                            continue;
+                    if(empty($images)){
+                        echo "<img src='../img/default.jpg' />";
+                    }else{
+                        $imgDirs = explode(';', $images);
+                        foreach ($imgDirs as $imgDir) {
+                            if(empty($imgDir)){
+                                continue;
+                            }
+                            echo "<img src='".$imgDir."' alt='no image' onerror=\"this.src='../img/default.jpg'\"/>";
                         }
-                        echo "<img src='".$imgDir."' alt='no image' onerror=\"this.src='../img/default.jpg'\"/>";
                     }
+
                 ?>
             </div>
         </div>
@@ -158,8 +163,8 @@ if(strpos($url, "search.php") || strpos($url, "home.php")) {
                     foreach ($relatedRecipes as $relatedRecipe) {
                         $pageContent = "<div class='col-lg-4'><h4>";
                         $pageContent = $pageContent.$relatedRecipe['rtitle']."</h4>";
-                        $imgDir = explode(';', $relatedRecipe['rimage'])[0];
-                        $pageContent = $pageContent."<p><img src='".$imgDir."' class='recipeImg' onerror=\"this.src='../img/default.jpg'\"/>";
+                        $img = explode(';', $relatedRecipe['rimage'])[0];
+                        $pageContent = $pageContent."<p><img src='".$img."' class='recipeImg' onerror=\"this.src='../img/default.jpg'\"/>";
                         $pageContent = $pageContent."<p>Created by: ".$relatedRecipe['uname']."</p>";
                         $pageContent = $pageContent."<p><a class='btn btn-default' href='recipe.php?id=".$relatedRecipe['rid']."'role='button'>View details »</a></p></div>";
                         echo $pageContent;
