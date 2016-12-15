@@ -145,11 +145,19 @@ session_start();
                             <?php
                                 $rsvpEvents = getRsvpEvent($username);
                                 foreach ($rsvpEvents as $event) {
-                                    echo "<div style='width: 100%;'><a href='event.php?eid=".$event['eid']."'>".$event['etitle']."</a><div class='eventStat'><a href='../php/cancel_event.php?id=".$event['eid']."'>cancel rsvp</a></div></div>";
+                                    $etitle = $event['etitle'];
+                                    if(strlen($etitle) > 17) {
+                                        $etitle = substr($etitle, 0, 17)."...";
+                                    }
+                                    echo "<div style='width: 100%;'><a href='event.php?eid=".$event['eid']."'>".$etitle."</a><div class='eventStat'><a href='../php/cancel_event.php?id=".$event['eid']."'>cancel rsvp</a></div></div>";
                                 }
                                 $nonRsvpEvents = getUserGroupButNoRsvpEvent($username);
                                 foreach ($nonRsvpEvents as $event) {
-                                    echo "<div style='width: 100%; color: grey;'><a href='event.php?eid=".$event['eid']."'>".$event['etitle']."<a href='../php/reserve_event.php?id=".$event['eid']."' class='eventStat'>rsvp now</a></div>";
+                                    $etitle = $event['etitle'];
+                                    if(strlen($etitle) > 17) {
+                                        $etitle = substr($etitle, 0, 17)."...";
+                                    }
+                                    echo "<div style='width: 100%; color: grey;'><a href='event.php?eid=".$etitle."'>".$etitle."<a href='../php/reserve_event.php?id=".$event['eid']."' class='eventStat'>rsvp now</a></div>";
                                 }
                             ?>
                         </div>

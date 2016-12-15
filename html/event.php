@@ -88,10 +88,11 @@ $isRSVP = isRSVP($eid, $username);
 
     <div id="event_details" class="form-group" style="display: block; margin-left: 20%; margin-right: 20%;">
         <h3 style="margin-left: -5%">Event Details</h3>
+        <hr style="margin-left: -5%">
         <h4>Event Title</h4>
         <p><?= $eventInfo[0]['etitle']?></p>
         <h4>Event Description</h4>
-        <p><?= $eventInfo[0]['edesc']?></p>
+        <p><?= str_replace("\\r\\n", "</br>", $eventInfo[0]['edesc'])?></p>
         <h4>Event Location</h4>
         <p><?= $eventInfo[0]['elocation']?></p>
         <h4>Event Date and Time</h4>
@@ -114,6 +115,9 @@ $isRSVP = isRSVP($eid, $username);
         <h3 style="margin-left: -5%">Event Report</h3>
         <?php
             $reports = getReportInfoByEid($eid);
+            if(empty($reports)){
+                echo "<hr>";
+            }
             for ($i = 0; $i < count($reports); $i++) {
                 echo "<h4>User: " . $reports[$i]['uname'] . "</h4>";
                 echo "<h4>Report Time: " . $reports[$i]['ertime'] . "</h4>";
@@ -129,7 +133,6 @@ $isRSVP = isRSVP($eid, $username);
                 echo "<hr>";
             }
         ?>
-        <hr>
     </div>
 
     <div id="write_report" class="form-group" style="display: <?php if($isRSVP) {echo 'block';} else {echo 'none';} ?>">
