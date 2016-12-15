@@ -211,7 +211,7 @@ if(strpos($url, "search.php") || strpos($url, "home.php")) {
                 <h3>Suggestion</h3>
                 <input maxlength="255" name="suggestion" placeholder="Enter improve suggestion here" type="text" class="textInput">
                 <h3>Rating</h3>
-                <select name="rate">
+                <select name="rate" class="form-control" style="width: 15%">
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
