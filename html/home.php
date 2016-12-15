@@ -112,7 +112,7 @@ session_start();
                             $count = 0;
                             $recipes = getUserViewedRecipe($username);
                             if(empty($recipes)){
-                                echo "<p>You have not viewed any recipe try to search one</p>";
+                                echo "<p>You have not viewed any recipe, try to search one</p>";
                             }
                             foreach ($recipes as $recipe) {
                                 if($count > 2) break;
@@ -147,12 +147,7 @@ session_start();
                             ?>
                             <script>
                                 $(function (){
-//                                    $(".popshow").on("mouseover",function () {
-                                        $("[data-toggle='popover']").popover().trigger('hover');
-//                                    });
-//                                    $(".popshow").on("mouseout",function () {
-//                                        $("[data-toggle='popover']").popover('hide');
-//                                    });
+                                    $("[data-toggle='popover']").popover();
                                 });
                             </script>
                             <div style="width: inherit; text-align: center;"><a href="joinGroup.php">+join group</a></div>
