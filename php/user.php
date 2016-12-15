@@ -6,8 +6,8 @@ require 'common_util.php';
 //initialize DB connection
 //sessionDestroy();
 $connection = connectDb();
-sessionDestroy();
-session_start();
+@sessionDestroy();
+@session_start();
 if (mysqli_connect_errno()) {
     echo "Failed to connect to MySQL: (" . mysqli_connect_errno() . ") " . mysqli_connect_error();
     $connection = null;

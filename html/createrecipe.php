@@ -138,6 +138,9 @@ session_start();
                     "<div style='width: 33%; float: left'><label style='margin-left: 40px'>Unit: </label>" +
                     "<select name='unit[]' class='form-control'>" +
                     "<option value='gram'>gram</option>" +
+                    "<option value='kilogram'>kilogram</option>" +
+                    "<option value='teaspoon'>teaspoon</option>" +
+                    "<option value='cup'>cup</option>" +
                     "<option value='ml'>ml</option>" +
                     "<option value='l'>l</option>" +
                     "<option value='item'>item</option>" +
