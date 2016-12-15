@@ -48,7 +48,7 @@ if(strpos($url, "search.php") || strpos($url, "home.php")) {
         <form method="post" action="search.php" enctype="multipart/form-data">
             <div class="search">
                 <div>
-                    <input id="searchText" name="search" type="text" placeholder="Find a recipe" style="color: grey;" value="<?php echo $keyword?>">
+                    <input id="searchText" name="search" type="text" class="form-control" placeholder="Find a recipe" style="color: grey;">
                 </div>
                 <div id="tag" style="cursor:pointer;">
                     Tag<span class="caret"></span>

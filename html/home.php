@@ -10,7 +10,10 @@ session_start();
     <link rel="stylesheet" href="../css/common.css" type="text/css"/>
     <link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css"/>
     <link rel="stylesheet" href="../css/home.css" type="text/css"/>
-    <script src="../js/jquery-3.1.1.min.js"></script>
+    <script src="https://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<!--    <script src="../js/jquery-3.1.1.min.js"></script>-->
     <script>
         $(document).ready(function () {
             $("#tags").hide();
@@ -32,7 +35,7 @@ session_start();
             <form method="post" action="search.php" enctype="multipart/form-data">
                 <div class="search">
                     <div>
-                        <input id="searchText" name="search" type="text" placeholder="Find a recipe" style="color: grey;">
+                        <input id="searchText" name="search" type="text" class="form-control" placeholder="Find a recipe" style="color: grey;">
                     </div>
                     <div id="tag" style="cursor:pointer;">
                         Tag<span class="caret"></span>
@@ -87,7 +90,9 @@ session_start();
                         <?php
                             $count = 0;
                             $recipes = getUserRecipe($username);
-                            $recipeNum = sizeof($recipes);
+                            if(empty($recipes)){
+                                echo "<p>no recipe now, <a href='createrecipe.php'>create one</a></p>";
+                            }
                             foreach ($recipes as $recipe) {
                                 if($count > 2) break;
                                 $count++;
@@ -106,7 +111,9 @@ session_start();
                         <?php
                             $count = 0;
                             $recipes = getUserViewedRecipe($username);
-                            $recipeNum = sizeof($recipes);
+                            if(empty($recipes)){
+                                echo "<p>You have not viewed any recipe try to search one</p>";
+                            }
                             foreach ($recipes as $recipe) {
                                 if($count > 2) break;
                                 $count++;
@@ -127,7 +134,7 @@ session_start();
                             <?php
                                 $groups = getUserGroup($username);
                                 foreach($groups as $group) {
-                                    echo "<div style='width: 100%;font-weight: bold;'>".$group['gname']."</div>";
+                                    echo "<div style='width: 100%;font-weight: bold;'>".$group['gname']."<a class='popshow' href='#' title='Description' data-container='body' data-toggle='popover' data-placement='right' data-content='".$group['description']."'>&nbsp;...</a></div>";
                                     echo "<hr style='margin: auto'>";
                                     $members = getGroupUsersById($group['gid']);
                                     foreach ($members as $member) {
@@ -138,6 +145,16 @@ session_start();
                                     echo "<br>";
                                 }
                             ?>
+                            <script>
+                                $(function (){
+//                                    $(".popshow").on("mouseover",function () {
+                                        $("[data-toggle='popover']").popover().trigger('hover');
+//                                    });
+//                                    $(".popshow").on("mouseout",function () {
+//                                        $("[data-toggle='popover']").popover('hide');
+//                                    });
+                                });
+                            </script>
                             <div style="width: inherit; text-align: center;"><a href="joinGroup.php">+join group</a></div>
                         </div>
                         <div class="list-group-item">

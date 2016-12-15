@@ -49,7 +49,7 @@ $isRSVP = isRSVP($eid, $username);
             <form method="post" action="search.php" enctype="multipart/form-data">
                 <div class="search">
                     <div>
-                        <input id="searchText" name="search" type="text" placeholder="Find a recipe" style="color: grey;" value="<?php echo $keyword?>">
+                        <input id="searchText" name="search" type="text" class="form-control" placeholder="Find a recipe" style="color: grey;">
                     </div>
                     <div id="tag" style="cursor:pointer;">
                         Tag<span class="caret"></span>
@@ -150,7 +150,7 @@ $isRSVP = isRSVP($eid, $username);
             <div id="reportImg" style="margin-left: 20%;"></div>
             <div align="center">
                 <br>
-                <input type="button" value="Add More Images!" onclick="addImg()">
+                <input type="button" value="Add More Images!" class="btn" onclick="addImg()">
             </div>
             <br><br><br>
             <div align="center">

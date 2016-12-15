@@ -37,7 +37,7 @@ record_usr_behavior(1, $keyword, date('Y-m-d H:i:s'),$username);
         <form method="post" action="search.php" enctype="multipart/form-data">
             <div class="search">
                 <div>
-                    <input id="searchText" name="search" type="text" placeholder="Find a recipe" style="color: grey;" value="<?php echo $keyword?>">
+                    <input id="searchText" name="search" type="text" class="form-control" placeholder="Find a recipe" style="color: grey;">
                 </div>
                 <div id="tag" style="cursor:pointer;">
                     Tag<span class="caret"></span>

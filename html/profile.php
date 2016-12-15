@@ -39,7 +39,7 @@ if($type == 'self'){
             <form method="post" action="search.php" enctype="multipart/form-data">
                 <div class="search">
                     <div>
-                        <input id="searchText" name="search" type="text" placeholder="Find a recipe" style="color: grey;">
+                        <input id="searchText" name="search" type="text" class="form-control" placeholder="Find a recipe" style="color: grey;">
                     </div>
                     <div id="tag" style="cursor:pointer;">
                         Tag<span class="caret"></span>
@@ -83,13 +83,13 @@ if($type == 'self'){
             <div class="form-group">
                 <h4>User Name: <?php echo $profile['uname']?></h4>
             </div>
-            <div class="form-group" style="margin-bottom: 40px;">
+            <div class="form-group" style="margin-bottom: 70px;">
                 <h4>Real Name: <?php echo $profile['realname']?></h4>
             </div>
             <div class="form-group">
                 <h4>Profile</h4>
                 <hr class="profileHr">
-                <p><?php echo $profile['uprofile']?></p>
+                <p><?php echo str_replace("\\r\\n", "</br>", $profile['uprofile']); ?></p>
             </div>
         </div>
     </div>

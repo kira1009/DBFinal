@@ -36,7 +36,7 @@ session_start();
             <form method="post" action="../html/search.php" enctype="multipart/form-data">
                 <div class="search">
                     <div>
-                        <input id="searchText" name="search" type="text" placeholder="Find a recipe" style="color: grey;">
+                        <input id="searchText" name="search" type="text" class="form-control" placeholder="Find a recipe" style="color: grey;">
                     </div>
                     <div id="tag" style="cursor:pointer;">
                         Tag<span class="caret"></span>
@@ -84,7 +84,7 @@ session_start();
 
             <div class="form-group">
                 <p style="text-align: center; font-size: medium; font-weight: bold;">Description:</p>
-                <textarea class="form-control" name="description" rows="10"></textarea>
+                <textarea class="form-control" name="description" rows="10" placeholder="Enter the detail here"></textarea>
             </div>
 
             <div align="center">

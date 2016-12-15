@@ -37,7 +37,7 @@ session_start();
             <form method="post" action="../html/search.php" enctype="multipart/form-data">
                 <div class="search">
                     <div>
-                        <input id="searchText" name="search" type="text" placeholder="Find a recipe" style="color: grey;">
+                        <input id="searchText" name="search" type="text" class="form-control" placeholder="Find a recipe" style="color: grey;">
                     </div>
                     <div id="tag" style="cursor:pointer;">
                         Tag<span class="caret"></span>
@@ -86,8 +86,8 @@ session_start();
                 <p style="text-align: center; font-size: medium; font-weight: bold;">Serving</p>
                 <input type="number" min="0" step="1" class="form-control" name="serving" placeholder="Enter your serving">
             </div>
-            <br><br><br>
-            <div class="form-group">
+            <br>
+            <div class="form-group" style="margin-bottom: 30px;min-height: 60px">
                 <p style="text-align: center; font-size: medium; font-weight: bold;">Tags</p>
                 <?php
                     $tags = getTags();
@@ -104,19 +104,19 @@ session_start();
                 <br>
                 <input type="button" value="Add More Ingredients!" class="btn" onclick="addIngredient()">
             </div>
-            <br><br><br>
+            <br>
             <div class="form-group">
                 <p style="text-align: center; font-size: medium; font-weight: bold;">Steps:</p>
                 <textarea class="form-control" name="step" rows="10"></textarea>
             </div>
-            <br><br><br>
+            <br>
             <p style="text-align: center; font-size: medium; font-weight: bold;">Images:</p>
             <div id="recipeImg" style="margin-left: 20%;"></div>
             <div align="center">
                 <br>
                 <input type="button" value="Add More Images!" class="btn" onclick="addImg()">
             </div>
-            <br><br><br>
+            <br>
             <div id="recipeLink">
                 <input type="text" class="form-control" name="link1" placeholder="Enter your related recipe link">
                 <br>
@@ -124,7 +124,7 @@ session_start();
                 <br>
                 <input type="text" class="form-control" name="link3" placeholder="Enter your related recipe link">
             </div>
-            <br><br><br>
+            <br>
             <div align="center">
                 <button type="submit" class="btn btn-primary" style="margin-bottom: 10px">Submit your recipe!</button>
             </div>

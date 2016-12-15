@@ -37,7 +37,7 @@ session_start();
             <form method="post" action="../html/search.php" enctype="multipart/form-data">
                 <div class="search">
                     <div>
-                        <input id="searchText" name="search" type="text" placeholder="Find a recipe" style="color: grey;">
+                        <input id="searchText" name="search" type="text" class="form-control" placeholder="Find a recipe" style="color: grey;">
                     </div>
                     <div id="tag" style="cursor:pointer;">
                         Tag<span class="caret"></span>
@@ -88,7 +88,7 @@ session_start();
                 <p style="text-align: center; font-size: medium; font-weight: bold;">Choose your group</p>
                 <?php
                     $groups = getUserGroup($_SESSION['username']);
-                    echo "<select name='gid' style='margin-left: 43%'>";
+                    echo "<select name='gid' style='margin-left: 43%; width: 14%;' class='form-control'>";
                     for($i = 0; $i < count($groups); $i++ ) {
                         echo "<option value='" . $groups[$i]['gid'] ."'>" . $groups[$i]['gname'] . "</option>";
                     }
@@ -109,7 +109,7 @@ session_start();
 
             <div class="form-group">
                 <p style="text-align: center; font-size: medium; font-weight: bold;">Event Date Time</p>
-                <input type="datetime-local" name="etime" style="margin-left: 36%">
+                <input type="datetime-local" class="form-control" name="etime" style="margin-left: 36%; width: 28%">
             </div>
 
             <div align="center">
