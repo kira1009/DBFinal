@@ -8,6 +8,42 @@ require 'common_util.php';
 $connection = connectDb();
 @sessionDestroy();
 @session_start();
+?>
+<html lang="en">
+<head>
+    <style>
+        .center {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            background-color: white;
+            width:100px;
+            height:100px;
+            -webkit-transform: translateX(-50%) translateY(-50%);
+            -moz-transform: translateX(-50%) translateY(-50%);
+            -ms-transform: translateX(-50%) translateY(-50%);
+            transform: translateX(-50%) translateY(-50%);
+        }
+        .div{
+            width:100%;
+            position:absolute;
+            top:0;
+            bottom:0;
+            background: white;
+
+        }
+        body{
+            margin:0;
+            padding:0;
+
+        }
+    </style>
+</head>
+<body>
+    <div class="div">
+        <img src="../img/loading.gif" class="center">
+    </div>
+<?php
 if (mysqli_connect_errno()) {
     echo "Failed to connect to MySQL: (" . mysqli_connect_errno() . ") " . mysqli_connect_error();
     $connection = null;
@@ -164,9 +200,5 @@ function user_login($connection) {
     return $response;
 }
 ?>
-<html lang="en">
-<head>
-</head>
-<body>
 </body>
 </html>
